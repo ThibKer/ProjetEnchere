@@ -25,6 +25,7 @@ public class Utilisateur {
 	private Integer noUtilisateur;
 	private String pseudo;
 	private String nom;
+	private String prenom;
 	private String email;
 	private String telephone;
 	private String rue;
@@ -40,12 +41,13 @@ public class Utilisateur {
 		super();
 	}
 
-	public Utilisateur(String pseudo, String nom, String email, String telephone, String rue, String codePostal,
-			String ville, String motDePasse, Integer credit, String administrateur, List<ArticleVendu> articlesVendus,
-			List<Enchere> encheres) {
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, Integer credit, String administrateur,
+			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
+		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.rue = rue;
@@ -58,13 +60,14 @@ public class Utilisateur {
 		this.encheres = encheres;
 	}
 
-	public Utilisateur(Integer noUtilisateur, String pseudo, String nom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, Integer credit, String administrateur,
+	public Utilisateur(Integer noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, Integer credit, String administrateur,
 			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
+		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.rue = rue;
@@ -99,6 +102,14 @@ public class Utilisateur {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 	public String getEmail() {
@@ -190,6 +201,8 @@ public class Utilisateur {
 		builder.append(pseudo);
 		builder.append(", nom=");
 		builder.append(nom);
+		builder.append(", prenom=");
+		builder.append(prenom);
 		builder.append(", email=");
 		builder.append(email);
 		builder.append(", telephone=");
