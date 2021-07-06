@@ -1,21 +1,21 @@
 package fr.eni.enchere.dal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.enchere.bo.Categorie;
 
 public class CategorieMock implements CategorieDAO {
+	private static List<Categorie> lstCat = new ArrayList<>();
 
 	@Override
 	public void insert(Categorie categorie) {
-		// TODO Auto-generated method stub
-
+		lstCat.add(categorie);
 	}
 
 	@Override
 	public List<Categorie> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return lstCat;
 	}
 
 	@Override
@@ -26,8 +26,7 @@ public class CategorieMock implements CategorieDAO {
 
 	@Override
 	public void delete(Categorie categorie) {
-		// TODO Auto-generated method stub
-
+		lstCat.remove(categorie);
 	}
 
 }

@@ -1,21 +1,21 @@
 package fr.eni.enchere.dal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.enchere.bo.Retrait;
 
 public class RetraitMock implements RetraitDAO {
+	private static List<Retrait> lstRetrait = new ArrayList<>();
 
 	@Override
 	public void insert(Retrait retrait) {
-		// TODO Auto-generated method stub
-
+		lstRetrait.add(retrait);
 	}
 
 	@Override
 	public List<Retrait> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return lstRetrait;
 	}
 
 	@Override
@@ -26,8 +26,7 @@ public class RetraitMock implements RetraitDAO {
 
 	@Override
 	public void delete(Retrait retrait) {
-		// TODO Auto-generated method stub
-
+		lstRetrait.remove(retrait);
 	}
 
 }

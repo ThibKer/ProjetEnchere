@@ -1,21 +1,21 @@
 package fr.eni.enchere.dal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.enchere.bo.Enchere;
 
 public class EnchereMock implements EnchereDAO {
+	private static List<Enchere> lstEnch = new ArrayList<>();
 
 	@Override
 	public void insert(Enchere enchere) {
-		// TODO Auto-generated method stub
-
+		lstEnch.add(enchere);
 	}
 
 	@Override
 	public List<Enchere> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return lstEnch;
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class EnchereMock implements EnchereDAO {
 
 	@Override
 	public void delete(Enchere enchere) {
-		// TODO Auto-generated method stub
-
+		lstEnch.remove(enchere);
+		
 	}
 
 }
