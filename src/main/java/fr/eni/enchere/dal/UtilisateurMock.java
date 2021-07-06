@@ -1,21 +1,21 @@
 package fr.eni.enchere.dal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.enchere.bo.Utilisateur;
 
 public class UtilisateurMock implements UtilisateurDAO {
+	private static List<Utilisateur> lstUtilisateur = new ArrayList<>();
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-
+		lstUtilisateur.add(utilisateur);
 	}
 
 	@Override
 	public List<Utilisateur> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return lstUtilisateur;
 	}
 
 	@Override
@@ -26,8 +26,7 @@ public class UtilisateurMock implements UtilisateurDAO {
 
 	@Override
 	public void delete(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-
+		lstUtilisateur.remove(utilisateur);
 	}
 
 }

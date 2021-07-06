@@ -1,21 +1,22 @@
 package fr.eni.enchere.dal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.enchere.bo.ArticleVendu;
 
 public class ArticleVenduMock implements ArticleVenduDAO {
+	private static List<ArticleVendu> lstArt = new ArrayList<>();
+	
 
 	@Override
 	public void insert(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
-
+		lstArt.add(articleVendu);
 	}
 
 	@Override
 	public List<ArticleVendu> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return lstArt;
 	}
 
 	@Override
@@ -26,8 +27,7 @@ public class ArticleVenduMock implements ArticleVenduDAO {
 
 	@Override
 	public void delete(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
-
+		lstArt.remove(articleVendu);
 	}
 
 }
