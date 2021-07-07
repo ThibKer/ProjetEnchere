@@ -3,8 +3,8 @@ package fr.eni.enchere.bll;
 import java.util.List;
 
 import fr.eni.enchere.bo.ArticleVendu;
-import fr.eni.enchere.dal.ArticleVenduDAO;
 import fr.eni.enchere.dal.FactoryDAO;
+import fr.eni.enchere.dal.ArticleVendu.ArticleVenduDAO;
 
 public class ArticleVenduManagerImpl implements ArticleVenduManager {
 

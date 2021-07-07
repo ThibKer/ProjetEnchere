@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.Categorie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,12 @@ public class CategorieMock implements CategorieDAO {
 	@Override
 	public void delete(Categorie categorie) {
 		lstCat.remove(categorie);
+	}
+
+	@Override
+	public Categorie getById(Integer integer) {
+		// TODO getById
+		return null;
 	}
 
 }

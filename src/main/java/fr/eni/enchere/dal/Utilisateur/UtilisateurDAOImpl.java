@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.Utilisateur;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,15 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.dal.ConnectionProvider;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	public String table = "UTILISATEURS";
 	private String INSERT = "INSERT INTO " + table
 			+ "(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private String SELECT = "SELECT * FROM " + table;
-	private String UPDATE = "UPDATE " + table
-			+ " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
-	private String DELETE = "DELETE * FROM " + table + " where noUtilisateur=?";
+	//private String UPDATE = "UPDATE " + table
+	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
+	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
+	private String DELETE = "DELETE * FROM " + table + " where no_utilisateur=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -68,6 +70,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 				utilisateur.setCredit(rs.getInt("credit"));
 				utilisateur.setAdministrateur(rs.getString("administrateur"));
+				
+				resultat.add(utilisateur);
+			
 
 			}
 		} catch (SQLException e) {
@@ -93,5 +98,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			System.err.println("Probleme");
 		}
 
+	}
+
+	@Override
+	public Utilisateur getById(Integer integer) {
+		// TODO getBYid
+		return null;
 	}
 }

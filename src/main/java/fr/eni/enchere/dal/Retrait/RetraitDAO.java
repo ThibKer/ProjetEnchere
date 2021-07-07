@@ -1,8 +1,9 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.Retrait;
 
 import java.util.List;
 
 import fr.eni.enchere.bo.Retrait;
+import fr.eni.enchere.dal.DAO;
 
 public interface RetraitDAO extends DAO<Retrait> {
 	

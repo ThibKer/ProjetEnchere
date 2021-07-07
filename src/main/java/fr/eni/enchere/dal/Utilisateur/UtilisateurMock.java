@@ -1,4 +1,4 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,12 @@ public class UtilisateurMock implements UtilisateurDAO {
 	@Override
 	public void delete(Utilisateur utilisateur) {
 		lstUtilisateur.remove(utilisateur);
+	}
+
+	@Override
+	public Utilisateur getById(Integer integer) {
+		// TODO getById
+		return null;
 	}
 
 }

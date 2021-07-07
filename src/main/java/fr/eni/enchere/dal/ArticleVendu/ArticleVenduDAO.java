@@ -1,8 +1,9 @@
-package fr.eni.enchere.dal;
+package fr.eni.enchere.dal.ArticleVendu;
 
 import java.util.List;
 
 import fr.eni.enchere.bo.ArticleVendu;
+import fr.eni.enchere.dal.DAO;
 
 public interface ArticleVenduDAO extends DAO<ArticleVendu> {
 	
