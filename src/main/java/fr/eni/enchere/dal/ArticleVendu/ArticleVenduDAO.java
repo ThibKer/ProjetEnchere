@@ -11,5 +11,6 @@ public interface ArticleVenduDAO extends DAO<ArticleVendu> {
 	public List<ArticleVendu>getAll();
 	public void update(ArticleVendu articleVendu);
 	public void delete(ArticleVendu articleVendu);
+	public ArticleVendu getById(Integer integer);
 
 }
