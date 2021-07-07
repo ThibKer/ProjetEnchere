@@ -38,7 +38,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			stmt.setString(1, articleVendu.getNomArticle());
 			stmt.setString(2, articleVendu.getDescription());
 			stmt.setTimestamp(3, Timestamp.valueOf(articleVendu.getDateDebutEncheres()));
-			stmt.setTimestamp(4, Timestamp.valueOf(articleVendu.getDateFineEncheres()));
+			stmt.setTimestamp(4, Timestamp.valueOf(articleVendu.getDateFinEncheres()));
 			stmt.setInt(5, articleVendu.getMiseAPrix());
 			stmt.setInt(6, articleVendu.getPrixVente());
 			stmt.setInt(7, articleVendu.getUtilisateur().getNoUtilisateur());
@@ -69,7 +69,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 				article.setNomArticle(rs.getString("nom_article"));
 				article.setDescription(rs.getString("description"));
 				article.setDateDebutEncheres(Timestamp.valueOf(rs.getString("date_debut_encheres")).toLocalDateTime());
-				article.setDateFineEncheres(Timestamp.valueOf(rs.getString("date_fin_encheres")).toLocalDateTime());
+				article.setDateFinEncheres(Timestamp.valueOf(rs.getString("date_fin_encheres")).toLocalDateTime());
 				article.setMiseAPrix(rs.getInt("prix_initial"));
 				article.setPrixVente(rs.getInt("prix_vente"));
 				
@@ -102,5 +102,11 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			System.err.println("Probleme");
 		}
 
+	}
+
+	@Override
+	public ArticleVendu getById(Integer integer) {
+		// TODO getById
+		return null;
 	}
 }

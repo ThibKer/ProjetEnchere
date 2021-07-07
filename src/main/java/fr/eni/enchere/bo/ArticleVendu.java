@@ -23,7 +23,7 @@ public class ArticleVendu {
 	private String nomArticle;
 	private String description;
 	private LocalDateTime dateDebutEncheres;
-	private LocalDateTime dateFineEncheres;
+	private LocalDateTime dateFinEncheres;
 	private Integer miseAPrix;
 	private Integer prixVente;
 	private String etatVente;
@@ -43,7 +43,7 @@ public class ArticleVendu {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFineEncheres = dateFineEncheres;
+		this.dateFinEncheres = dateFineEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
@@ -61,7 +61,7 @@ public class ArticleVendu {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFineEncheres = dateFineEncheres;
+		this.dateFinEncheres = dateFineEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
@@ -103,12 +103,12 @@ public class ArticleVendu {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
-	public LocalDateTime getDateFineEncheres() {
-		return dateFineEncheres;
+	public LocalDateTime getDateFinEncheres() {
+		return dateFinEncheres;
 	}
 
-	public void setDateFineEncheres(LocalDateTime dateFineEncheres) {
-		this.dateFineEncheres = dateFineEncheres;
+	public void setDateFinEncheres(LocalDateTime dateFineEncheres) {
+		this.dateFinEncheres = dateFineEncheres;
 	}
 
 	public Integer getMiseAPrix() {
@@ -179,7 +179,7 @@ public class ArticleVendu {
 		builder.append(", dateDebutEncheres=");
 		builder.append(dateDebutEncheres);
 		builder.append(", dateFineEncheres=");
-		builder.append(dateFineEncheres);
+		builder.append(dateFinEncheres);
 		builder.append(", miseAPrix=");
 		builder.append(miseAPrix);
 		builder.append(", prixVente=");

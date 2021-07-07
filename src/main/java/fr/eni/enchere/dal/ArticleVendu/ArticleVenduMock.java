@@ -30,4 +30,10 @@ public class ArticleVenduMock implements ArticleVenduDAO {
 		lstArt.remove(articleVendu);
 	}
 
+	@Override
+	public ArticleVendu getById(Integer integer) {
+		// TODO getByID
+		return null;
+	}
+
 }
