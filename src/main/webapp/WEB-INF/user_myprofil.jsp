@@ -20,73 +20,54 @@
 	<label for="st">
 	   <fmt:message key="st_user_profil" bundle="${r}"></fmt:message>
 	</label>
-
-	<form action="HomeServlet" method="POST" class="f-create-user">
+	
 	  <div>
 	    <label for="pseudo">
 	    	<fmt:message key="l_pseudo" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="pseudo" id="pseudo" required>
+	    <i>${user.pseudo}</i>
 	  </div>
 	  <div>
 	    <label for="nom">
 	    	<fmt:message key="l_nom" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="nom" id="nom" required>
+	    <i>${user.nom}</i>
 	  </div>
 	  <div>
 	    <label for="prenom">
 	    	<fmt:message key="l_prenom" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="prenom" id="prenom" required>
+	    <i>${user.prenom}</i>
 	  </div>
 	  <div>
 	  	<label for="email">
 	    	<fmt:message key="l_email" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="email" name="email" id="email">
+	    <i>${user.email}</i>
 	  </div>
 	  <div>
 	  	<label for="tel">
 	    	<fmt:message key="l_telephone" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="tel" id="tel">
+	    <i>${user.tel}</i>
 	  </div>
 	  <div>
 	  	<label for="rue">
 	    	<fmt:message key="l_rue" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="rue" id="rue">
+	    <i>${user.rue}</i>
 	  </div>
 	  <div>
 	  	<label for="postal">
 	    	<fmt:message key="l_codepostal" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="postal" id="postal">
+	    <i>${user.postal}</i>
 	  </div>
 	  <div>
 	  	<label for="ville">
 	    	<fmt:message key="l_ville" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="ville" id="ville">
-	  </div>
-	  <div>
-	  	<label for="current_mdp">
-	    	<fmt:message key="l_current_mdp" bundle="${r}"></fmt:message>
-	    </label>
-	    <input type="password" name="current_mdp" id="current_mdp">
-	  </div>
-	  <div>
-	  	<label for="new_mdp">
-	    	<fmt:message key="l_new_mdp" bundle="${r}"></fmt:message>
-	    </label>
-	    <input type="password" name="new_mdp" id="new_mdp">
-	  </div>
-	  <div>
-	  	<label for="mdp2">
-	    	<fmt:message key="l_confirmation" bundle="${r}"></fmt:message>
-	    </label>
-	    <input type="password" name="mdp2" id="mdp2">
+	    <i>${user.ville}</i>
 	  </div>
 	  
 	  <div>
@@ -97,15 +78,13 @@
 	  </div>
 	  
 	  <div>
-	  	<fmt:message key="btn_enregistrer" bundle="${r}" var="enregistrer"/>	    
-		<input type="submit" name="save" value="${enregistrer}">
+	  	<fmt:message key="btn_retour" bundle="${r}" var="retour"/>	    
+		<input type="submit" name="back" value="${retour}">
 	  </div>
 	  <div>
-	    <fmt:message key="btn_delete_user" bundle="${r}" var="supprimer"/>   
-		<input type="submit" name="delete" value="${supprimer}">
+	  	<fmt:message key="btn_modifier" bundle="${r}" var="modifier"/>	    
+		<input type="submit" name="upload" value="${modifier}">
 	  </div>
 	  
-	</form>
-	
 </body>
 </html>
