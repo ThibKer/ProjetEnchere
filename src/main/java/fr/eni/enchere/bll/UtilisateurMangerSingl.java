@@ -9,7 +9,5 @@ public class UtilisateurMangerSingl {
 			instance = new UtilisateurManagerImpl();
 		}
 		return instance; 
-		
-
 	}
 }
