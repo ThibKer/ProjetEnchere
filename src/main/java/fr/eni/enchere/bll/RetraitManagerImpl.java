@@ -3,8 +3,8 @@ package fr.eni.enchere.bll;
 import java.util.List;
 
 import fr.eni.enchere.bo.Retrait;
-import fr.eni.enchere.dal.RetraitDAO;
 import fr.eni.enchere.dal.FactoryDAO;
+import fr.eni.enchere.dal.Retrait.RetraitDAO;
 
 public class RetraitManagerImpl implements RetraitManager {
 
