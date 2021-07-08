@@ -35,4 +35,24 @@ public class UtilisateurMock implements UtilisateurDAO {
 		return null;
 	}
 
+	@Override
+	public Utilisateur getByEmailPassword(String identifiant, String mdp) {
+		for (Utilisateur u : lstUtilisateur) {
+			if(u.getEmail().equals(identifiant) && u.getMotDePasse().equals(mdp)) {
+				return u;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Utilisateur getByPseudoPassword(String identifiant, String mdp) {
+		for (Utilisateur u : lstUtilisateur) {
+			if(u.getPseudo().equals(identifiant) && u.getMotDePasse().equals(mdp)) {
+				return u;
+			}
+		}
+		return null;
+	}
+
 }

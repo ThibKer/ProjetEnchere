@@ -19,7 +19,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	//private String UPDATE = "UPDATE " + table
 	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
 	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
-	private String DELETE = "DELETE * FROM " + table + " where no_utilisateur=?";
+	private String DELETE = "DELETE * FROM " + table + " WHERE no_utilisateur=?";
+	private String SELECT_ID = "SELECT * FROM " + table + " WHERE no_utilisateur=?";
+	private String SELECT_EMAIL_MDP = "SELECT * FROM " + table + " WHERE email=? AND mot_de_passe=?";
+	private String SELECT_PSEUDO_MDP = "SELECT * FROM " + table + " WHERE pseudo=? AND mot_de_passe=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -102,7 +105,81 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur getById(Integer integer) {
-		// TODO getBYid
-		return null;
+		Utilisateur res = new Utilisateur();
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(SELECT_ID);
+			stmt.setString(1, integer.toString());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {	
+				res.setPseudo(rs.getString("pseudo"));
+				res.setNom(rs.getString("nom"));
+				res.setPrenom(rs.getString("prenom"));
+				res.setEmail(rs.getString("email"));
+				res.setTelephone(rs.getString("telephone"));
+				res.setRue(rs.getString("rue"));
+				res.setCodePostal(rs.getString("code_postal"));
+				res.setVille(rs.getString("ville"));
+				res.setMotDePasse(rs.getString("mot_de_passe"));
+				res.setCredit(rs.getInt("credit"));
+				res.setAdministrateur(rs.getString("administrateur"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public Utilisateur getByEmailPassword(String identifiant, String mdp) {
+		Utilisateur res = new Utilisateur();
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(SELECT_EMAIL_MDP);
+			stmt.setString(1, identifiant);
+			stmt.setString(2, mdp);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {	
+				res.setPseudo(rs.getString("pseudo"));
+				res.setNom(rs.getString("nom"));
+				res.setPrenom(rs.getString("prenom"));
+				res.setEmail(rs.getString("email"));
+				res.setTelephone(rs.getString("telephone"));
+				res.setRue(rs.getString("rue"));
+				res.setCodePostal(rs.getString("code_postal"));
+				res.setVille(rs.getString("ville"));
+				res.setMotDePasse(rs.getString("mot_de_passe"));
+				res.setCredit(rs.getInt("credit"));
+				res.setAdministrateur(rs.getString("administrateur"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public Utilisateur getByPseudoPassword(String identifiant, String mdp) {
+		Utilisateur res = new Utilisateur();
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(SELECT_PSEUDO_MDP);
+			stmt.setString(1, identifiant);
+			stmt.setString(2, mdp);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {	
+				res.setPseudo(rs.getString("pseudo"));
+				res.setNom(rs.getString("nom"));
+				res.setPrenom(rs.getString("prenom"));
+				res.setEmail(rs.getString("email"));
+				res.setTelephone(rs.getString("telephone"));
+				res.setRue(rs.getString("rue"));
+				res.setCodePostal(rs.getString("code_postal"));
+				res.setVille(rs.getString("ville"));
+				res.setMotDePasse(rs.getString("mot_de_passe"));
+				res.setCredit(rs.getInt("credit"));
+				res.setAdministrateur(rs.getString("administrateur"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 }

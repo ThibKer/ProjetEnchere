@@ -39,18 +39,18 @@
 	  </div>
 	  <div>
 	  	<fmt:message key="btn_connexion" bundle="${r}" var="connect"/>	    
-		<input type="submit" value="${connect}">
+		<input type="submit" name="go" value="${connect}">
 	  </div>
 	  <div>
 	    <fmt:message key="h_mdp_lost" bundle="${r}" var="lost"/>   
-		<input type="submit" value="${lost}">
+		<input type="submit" name="lost" value="${lost}">
 	  </div>
 	</form>
 	
 	<form action="CreateUserServlet" method="POST" class="f-connect">
 	  <div>
 	    <fmt:message key="btn_creation" bundle="${r}" var="create"/>    
-		<input type="submit" value="${create}">
+		<input type="submit" name="new" value="${create}">
 	  </div>
 	</form>
 	

@@ -9,4 +9,6 @@ public interface UtilisateurManager {
 	public void addUtilisateur(Utilisateur utilisateur);
 	public List<Utilisateur>getAllUtilisateurs();
 	
+	public Utilisateur getUtilisateurByFields(String identifiant, String mdp);
+	
 }
