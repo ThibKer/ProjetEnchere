@@ -17,4 +17,18 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	public List<Utilisateur> getAllUtilisateurs() {
 		return dao.getAll();
 	}
+
+	@Override
+	public Utilisateur getUtilisateurByFields(String identifiant, String mdp) {
+		Utilisateur utilisateur = new Utilisateur();
+
+			utilisateur = dao.getByEmailPassword(identifiant, mdp);
+		
+//		if(identifiant.contains(".")) {
+//			utilisateur = dao.getByEmailPassword(identifiant, mdp);
+//		}else {
+//			utilisateur = dao.getByPseudoPassword(identifiant, mdp);
+//		}
+		return utilisateur;
+	}
 }

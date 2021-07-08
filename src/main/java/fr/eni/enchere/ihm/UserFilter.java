@@ -55,13 +55,13 @@ public class UserFilter implements Filter {
 		    if(loggin != null) {
 		        
 		        resp.sendRedirect(req.getServletContext().getContextPath() + "/HomeServlet");          
-		            chain.doFilter(request, response);
+		           
 		        
 		    } else {
 		    	resp.sendRedirect(req.getServletContext().getContextPath() + "/HomeServlet");
-		                chain.doFilter(request, response);
+		                
 		   }
-	      
+	      chain.doFilter(request, response);
 	      // call next filter in the chain : let j_security_check authenticate 
 	      // user
 	     
