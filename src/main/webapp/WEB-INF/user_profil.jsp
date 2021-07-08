@@ -25,55 +25,68 @@
 	    <label for="pseudo">
 	    	<fmt:message key="l_pseudo" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.pseudo}</i>
+	    <i>${user.pseudo}</i>
 	  </div>
 	  <div>
 	    <label for="nom">
 	    	<fmt:message key="l_nom" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.nom}</i>
+	    <i>${user.nom}</i>
 	  </div>
 	  <div>
 	    <label for="prenom">
 	    	<fmt:message key="l_prenom" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.prenom}</i>
+	    <i>${user.prenom}</i>
 	  </div>
 	  <div>
 	  	<label for="email">
 	    	<fmt:message key="l_email" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.email}</i>
+	    <i>${user.email}</i>
 	  </div>
 	  <div>
 	  	<label for="tel">
 	    	<fmt:message key="l_telephone" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.tel}</i>
+	    <i>${user.tel}</i>
 	  </div>
 	  <div>
 	  	<label for="rue">
 	    	<fmt:message key="l_rue" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.rue}</i>
+	    <i>${user.rue}</i>
 	  </div>
 	  <div>
 	  	<label for="postal">
 	    	<fmt:message key="l_codepostal" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.postal}</i>
+	    <i>${user.postal}</i>
 	  </div>
 	  <div>
 	  	<label for="ville">
 	    	<fmt:message key="l_ville" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${profil.ville}</i>
+	    <i>${user.ville}</i>
+	  </div>
+	  
+	  <div>
+		  <label for="credit">
+		    	<fmt:message key="l_credit" bundle="${r}"></fmt:message>
+		  </label>
+		  <i>${user.credit}</i>
 	  </div>
 	  
 	  <div>
 	  	<fmt:message key="btn_retour" bundle="${r}" var="retour"/>	    
 		<input type="submit" name="back" value="${retour}">
 	  </div>
-	  
+
+	  <c:if test="${idProfil == idUser}">
+		  <div>
+		  	<fmt:message key="btn_modifier" bundle="${r}" var="modifier"/>	    
+			<input type="submit" name="upload" value="${modifier}">
+		  </div>
+	  </c:if>
 </body>
 </html>
