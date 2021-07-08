@@ -26,7 +26,7 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	this.getServletContext().setAttribute("locale", Locale.ENGLISH);
+    	this.getServletContext().setAttribute("locale", Locale.FRENCH);
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

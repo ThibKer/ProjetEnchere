@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     
 <!DOCTYPE html>
 <html>
@@ -15,9 +16,10 @@
 <title>
 	<fmt:message key="t_home" bundle="${r}"></fmt:message>
 </title>
+<link rel="stylesheet" href="style.css" type="text/css"/>
 </head>
-<body>
-	<nav>
+<body class="body">
+	<nav >
 		<c:if test="${!empty User}">
 			<a href="/loggin">
 				<fmt:message key="nav_inscription_connect" bundle="${r}"></fmt:message>
@@ -40,19 +42,19 @@
 	</nav>
 	
 	
-	<label for="st">
+	<label for="st" class = "sous-titre">
 	   <fmt:message key="st_home" bundle="${r}"></fmt:message>
 	</label>
 
 	<form action="HomeServlet" method="POST" enctype="multipart/form-data" class="f-create-article">
-	  <div>
+	  <div class = "h-filtre">
 	    <label for="filtre">
 	    	<fmt:message key="l_filtre" bundle="${r}"></fmt:message>
 	    </label>
 	    <fmt:message key="ph_filtre" bundle="${r}" var="placeholder"/>     
 	    <input placeholder="${placeholder}" type="search" name="filtre" id="filtre" required>
 	  </div>
-	  <div>
+	  <div class = "h-categorie">
 	    <label for="categorie">
 	    	<fmt:message key="l_categorie" bundle="${r}"></fmt:message>
 	    </label>
@@ -67,25 +69,25 @@
 	  </div>
 	  
 	  <c:if test="${empty User}">
-		  <div>
-		  	<input class="radio" onClick="radioEvent(this,'radio','groupventes','groupachats')" type="radio" name="achats" id="achats">
-		    <label for="achats">
+		  <div class = "bloc-radio-checkbox">
+		  	<input class="radio bloc-radio-i" onClick="radioEvent(this,'radio','groupventes','groupachats')" type="radio" name="achats" id="achats">
+		    <label for="achats" class="bloc-radio-l">
 		    	<fmt:message key="rb_achats" bundle="${r}"></fmt:message>
 		    </label>
 		    <div>
-		    	<div>
+		    	<div class="bloc-checkbox">
 			    	<input class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-open" id="achats-open">
 				    <label for="achats-open">
 				    	<fmt:message key="cb_achats_open" bundle="${r}"></fmt:message>
 				    </label>
 		    	</div>
-		    	<div>
+		    	<div class="bloc-checkbox">
 			    	<input class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-my" id="achats-my">
 				    <label for="achats-my">
 				    	<fmt:message key="cb_achats_my" bundle="${r}"></fmt:message>
 				    </label>
 		    	</div>
-		    	<div>
+		    	<div class="bloc-checkbox">
 			    	<input class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-win" id="achats-win">
 				    <label for="achats-win">
 				    	<fmt:message key="cb_achats_win" bundle="${r}"></fmt:message>
@@ -94,25 +96,25 @@
 		    </div>
 		  </div>
 		  
-		  <div>
-		  	<input class="radio" onClick="radioEvent(this,'radio','groupachats','groupventes')" type="radio" name="ventes" id="ventes">
-		    <label for="achats">
+		  <div class = "bloc-radio-checkbox">
+		  	<input class="radio bloc-radio-i" onClick="radioEvent(this,'radio','groupachats','groupventes')" type="radio" name="ventes" id="ventes">
+		    <label for="achats" class="bloc-radio-l" >
 		    	<fmt:message key="rb_ventes" bundle="${r}"></fmt:message>
 		    </label>
 		    <div>
-		    	<div>
+		    	<div class="bloc-checkbox">
 			    	<input class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-ec" id="ventes-ec">
 				    <label for="ventes-ec">
 				    	<fmt:message key="cb_ventes_ec" bundle="${r}"></fmt:message>
 				    </label>
 		    	</div>
-		    	<div>
+		    	<div class="bloc-checkbox">
 			    	<input class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-nd" id="ventes-nd">
 				    <label for="ventes-nd">
 				    	<fmt:message key="cb_ventes_nd" bundle="${r}"></fmt:message>
 				    </label>
-		    	</div>
-		    	<div>
+		    	</div >
+		    	<div class="bloc-checkbox">
 			    	<input class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-end" id="ventes-end">
 				    <label for="ventes-end">
 				    	<fmt:message key="cb_ventes_end" bundle="${r}"></fmt:message>
@@ -121,7 +123,7 @@
 		    </div>
 		  </div>
 		</c:if>
-	  <div>
+	  <div class = "bouton">
 	    <fmt:message key="btn_rechercher" bundle="${r}" var="rechercher"/>   
 		<input type="submit" name="search" value="${rechercher}">
 	  </div>  
