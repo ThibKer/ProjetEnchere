@@ -1,4 +1,4 @@
-package fr.eni.enchere.bll;
+package fr.eni.enchere.bll.Utilisateur;
 
 import java.util.List;
 
