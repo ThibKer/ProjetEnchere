@@ -20,12 +20,12 @@
 </head>
 <body class="body">
 	<nav >
-		<c:if test="${!empty User}">
+		<c:if test="${empty User}">
 			<a href="/loggin">
 				<fmt:message key="nav_inscription_connect" bundle="${r}"></fmt:message>
 			</a>
 		</c:if>	
-		<c:if test="${empty User}">
+		<c:if test="${!empty User}">
 			<a href="/encheres">
 				<fmt:message key="nav_encheres" bundle="${r}"></fmt:message>
 			</a>
@@ -68,7 +68,7 @@
 		</select>
 	  </div>
 	  
-	  <c:if test="${empty User}">
+	  <c:if test="${!empty User}">
 		  <div class = "bloc-radio-checkbox">
 		  	<input class="radio bloc-radio-i" onClick="radioEvent(this,'radio','groupventes','groupachats')" type="radio" name="achats" id="achats">
 		    <label for="achats" class="bloc-radio-l">
