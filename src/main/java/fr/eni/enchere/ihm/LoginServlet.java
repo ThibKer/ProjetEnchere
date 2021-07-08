@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			loggedUser.setNoUtilisateur( userTest.getNoUtilisateur() );
 			loggedUser.setPseudo( userTest.getPseudo() );
 			loggedUser.setNom( userTest.getNom() );
-			loggedUser.setPrenom( userTest.getPrenom( ));
+			loggedUser.setPrenom( userTest.getPrenom() );
 			loggedUser.setEmail( userTest.getEmail() );
 			loggedUser.setTelephone( userTest.getTelephone() );
 			loggedUser.setRue( userTest.getRue() );
@@ -76,8 +76,7 @@ public class LoginServlet extends HttpServlet {
 		else {
 			System.out.println("nulllllllllllll");
 			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
-		}
-			
+		}		
 	}
 	
 	/**
