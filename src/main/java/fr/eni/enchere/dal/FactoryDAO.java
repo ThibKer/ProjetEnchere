@@ -9,7 +9,7 @@ import fr.eni.enchere.dal.Enchere.EnchereMock;
 import fr.eni.enchere.dal.Retrait.RetraitDAO;
 import fr.eni.enchere.dal.Retrait.RetraitMock;
 import fr.eni.enchere.dal.Utilisateur.UtilisateurDAO;
-import fr.eni.enchere.dal.Utilisateur.UtilisateurMock;
+import fr.eni.enchere.dal.Utilisateur.UtilisateurDAOImpl;
 
 public class FactoryDAO {
 	public static CategorieDAO getCategorieDAO() {
@@ -21,7 +21,7 @@ public class FactoryDAO {
 	}
 
 	public static UtilisateurDAO getUtilisateurDAO() {
-		return new UtilisateurMock();
+		return new UtilisateurDAOImpl();
 	}
 
 	public static ArticleVenduDAO getArticleVenduDAO() {

@@ -1,5 +1,7 @@
 package fr.eni.enchere.ihm.model;
 
+import fr.eni.enchere.bo.Utilisateur;
+
 public class ModelLogged {
 	private Integer noUtilisateur;
 	private String pseudo;
@@ -17,6 +19,20 @@ public class ModelLogged {
 	public ModelLogged() {
 	}
 
+	public ModelLogged(Utilisateur utilisateur) {
+		this.noUtilisateur = utilisateur.getNoUtilisateur();
+		this.pseudo = utilisateur.getPseudo();
+		this.nom = utilisateur.getNom();
+		this.prenom = utilisateur.getPrenom();
+		this.email = utilisateur.getEmail();
+		this.telephone = utilisateur.getTelephone();
+		this.rue = utilisateur.getRue();
+		this.codePostal = utilisateur.getCodePostal();
+		this.ville = utilisateur.getVille();
+		this.motDePasse = utilisateur.getMotDePasse();
+		this.credit = utilisateur.getCredit();
+		this.administrateur = utilisateur.getAdministrateur();
+	}
 	public ModelLogged(Integer noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, Integer credit, String administrateur) {
 		this.noUtilisateur = noUtilisateur;

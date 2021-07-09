@@ -10,5 +10,6 @@ public interface UtilisateurManager {
 	public List<Utilisateur>getAllUtilisateurs();
 	
 	public Utilisateur getUtilisateurByFields(String identifiant, String mdp);
+	public Utilisateur createUtilisateur(Utilisateur utilisateur);
 	
 }

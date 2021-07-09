@@ -21,14 +21,22 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	@Override
 	public Utilisateur getUtilisateurByFields(String identifiant, String mdp) {
 		Utilisateur utilisateur = new Utilisateur();
-
-			utilisateur = dao.getByEmailPassword(identifiant, mdp);
 		
-//		if(identifiant.contains(".")) {
+		System.out.println("mana impl");
+
 //			utilisateur = dao.getByEmailPassword(identifiant, mdp);
-//		}else {
-//			utilisateur = dao.getByPseudoPassword(identifiant, mdp);
-//		}
+		
+		if(identifiant.contains(".")) {
+			utilisateur = dao.getByEmailPassword(identifiant, mdp);
+		}else {
+			utilisateur = dao.getByPseudoPassword(identifiant, mdp);
+		}
 		return utilisateur;
+	}
+
+	@Override
+	public Utilisateur createUtilisateur(Utilisateur utilisateur) {
+		addUtilisateur(utilisateur);
+		return getUtilisateurByFields(utilisateur.getPseudo(),utilisateur.getMotDePasse());
 	}
 }

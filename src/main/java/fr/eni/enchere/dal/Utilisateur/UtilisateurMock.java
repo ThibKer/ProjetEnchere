@@ -10,6 +10,7 @@ public class UtilisateurMock implements UtilisateurDAO {
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
+		System.out.println("insert mock");
 		lstUtilisateur.add(utilisateur);
 	}
 
@@ -47,6 +48,7 @@ public class UtilisateurMock implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur getByPseudoPassword(String identifiant, String mdp) {
+		System.out.println("getPseudo mock");
 		for (Utilisateur u : lstUtilisateur) {
 			if(u.getPseudo().equals(identifiant) && u.getMotDePasse().equals(mdp)) {
 				return u;

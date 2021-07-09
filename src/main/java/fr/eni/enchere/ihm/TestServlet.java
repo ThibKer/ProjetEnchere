@@ -1,10 +1,6 @@
 package fr.eni.enchere.ihm;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,45 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class TestServlet
  */
-@WebServlet("/HomeServlet")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/TestServlet")
+public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public TestServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
-//    @Override
-//    public void init() throws ServletException {
-//    	this.getServletContext().setAttribute("locale", Locale.FRENCH);
-//    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String test = request.getParameter("test");
-		String search = request.getParameter("search");
-		System.out.println(test);
-		System.out.println(search);
-		
-		if(test != null) {
-			request.getRequestDispatcher("WEB-INF/user_creation.jsp").forward(request, response);
-		}else {
-			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);	
-
-		}
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
