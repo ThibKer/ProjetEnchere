@@ -3,7 +3,7 @@ package fr.eni.enchere.dal;
 import fr.eni.enchere.dal.ArticleVendu.ArticleVenduDAO;
 import fr.eni.enchere.dal.ArticleVendu.ArticleVenduMock;
 import fr.eni.enchere.dal.Categorie.CategorieDAO;
-import fr.eni.enchere.dal.Categorie.CategorieMock;
+import fr.eni.enchere.dal.Categorie.CategorieDAOImpl;
 import fr.eni.enchere.dal.Enchere.EnchereDAO;
 import fr.eni.enchere.dal.Enchere.EnchereMock;
 import fr.eni.enchere.dal.Retrait.RetraitDAO;
@@ -13,7 +13,7 @@ import fr.eni.enchere.dal.Utilisateur.UtilisateurDAOImpl;
 
 public class FactoryDAO {
 	public static CategorieDAO getCategorieDAO() {
-		return new CategorieMock();
+		return new CategorieDAOImpl();
 	}
 
 	public static RetraitDAO getRetraitDAO() {

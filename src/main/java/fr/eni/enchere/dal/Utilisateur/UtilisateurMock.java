@@ -57,4 +57,10 @@ public class UtilisateurMock implements UtilisateurDAO {
 		return null;
 	}
 
+	@Override
+	public boolean existPseudo(String pseudo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

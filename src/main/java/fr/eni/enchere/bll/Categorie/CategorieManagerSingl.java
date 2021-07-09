@@ -1,6 +1,6 @@
 package fr.eni.enchere.bll.Categorie;
 
-public class CategorieMangerSingl {
+public class CategorieManagerSingl {
 
 	private static CategorieManager instance;
 	

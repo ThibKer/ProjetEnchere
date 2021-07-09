@@ -15,5 +15,7 @@ public interface UtilisateurDAO extends DAO<Utilisateur> {
 	public Utilisateur getById(Integer integer);
 	public Utilisateur getByEmailPassword(String identifiant, String mdp);
 	public Utilisateur getByPseudoPassword(String identifiant, String mdp);
+	
+	public boolean existPseudo(String pseudo);
 
 }

@@ -23,6 +23,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private String SELECT_ID = "SELECT * FROM " + table + " WHERE no_utilisateur=?";
 	private String SELECT_EMAIL_MDP = "SELECT * FROM " + table + " WHERE email=? AND mot_de_passe=?";
 	private String SELECT_PSEUDO_MDP = "SELECT * FROM " + table + " WHERE pseudo=? AND mot_de_passe=?";
+	private String SELECT_PSEUDO = "SELECT * FROM " + table + " WHERE pseudo=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -181,5 +182,21 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public boolean existPseudo(String pseudo) {
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(SELECT_PSEUDO);
+			stmt.setString(1, pseudo);;
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {	
+//				System.out.println(rs.next());
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

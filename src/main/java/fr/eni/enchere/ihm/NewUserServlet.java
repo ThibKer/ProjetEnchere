@@ -47,8 +47,15 @@ public class NewUserServlet extends HttpServlet {
 		String btn_creation = request.getParameter("create");
 		String btn_annuler = request.getParameter("cancel");
 		if(btn_creation != null) {
+			
+			
 			System.out.println("btn_creation");
-			if(mdp.equals(mdpconfirm)) {
+			
+//			managerUtilisateur.checkIfDispo(pseudo);
+			
+//			managerUtilisateur.checkIfValid(request);
+			
+			if(managerUtilisateur.checkIfValid(request)) {
 				utilisateur.setPseudo(pseudo);
 				utilisateur.setNom(nom);
 				utilisateur.setPrenom(prenom);
@@ -58,14 +65,15 @@ public class NewUserServlet extends HttpServlet {
 				utilisateur.setCodePostal(codepostal);
 				utilisateur.setVille(ville);
 				utilisateur.setMotDePasse(mdp);
+				utilisateur.setCredit(100);
 				
-						System.out.println("user : "+utilisateur);
+//						System.out.println("user : "+utilisateur);
 				managerUtilisateur.addUtilisateur( utilisateur );
 				loggedUser = new ModelLogged( managerUtilisateur.getUtilisateurByFields(pseudo, mdp) );
 //				loggedUser = new ModelLogged(managerUtilisateur.createUtilisateur( utilisateur ));
-						System.out.println("Logged : "+loggedUser);	
+//						System.out.println("Logged : "+loggedUser);	
 						
-				this.getServletContext().setAttribute("User", loggedUser);
+				request.getSession().setAttribute("User", loggedUser);
 				request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
 			}
 			

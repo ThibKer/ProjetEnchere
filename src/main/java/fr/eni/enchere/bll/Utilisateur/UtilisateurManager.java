@@ -2,6 +2,8 @@ package fr.eni.enchere.bll.Utilisateur;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import fr.eni.enchere.bo.Utilisateur;
 
 public interface UtilisateurManager {
@@ -11,5 +13,6 @@ public interface UtilisateurManager {
 	
 	public Utilisateur getUtilisateurByFields(String identifiant, String mdp);
 	public Utilisateur createUtilisateur(Utilisateur utilisateur);
+	public boolean checkIfValid(HttpServletRequest request);
 	
 }

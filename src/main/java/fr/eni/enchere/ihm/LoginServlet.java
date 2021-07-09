@@ -32,15 +32,16 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	this.getServletContext().setAttribute("locale", Locale.ENGLISH);
-    	this.getServletContext().setAttribute("User", "some");
+//    	this.getServletContext().setAttribute("locale", Locale.ENGLISH);
+//    	this.getServletContext().setAttribute("User", "some");
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Object loggin = this.getServletContext().getAttribute("User");
+		Object loggin = request.getSession().getAttribute("User");
 		String go = request.getParameter("go");
+		
 		String identifiant = request.getParameter("identifiant");
 		String mdp = request.getParameter("mdp");
 		
@@ -53,25 +54,30 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("laaaaaa");
 			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);	
 		}
-		
-		Utilisateur userTest = managerUtilisateur.getUtilisateurByFields(identifiant, mdp);
-		if(userTest != null) {
-			System.out.println("iciiiiiiiiii");
-			loggedUser.setNoUtilisateur( userTest.getNoUtilisateur() );
-			loggedUser.setPseudo( userTest.getPseudo() );
-			loggedUser.setNom( userTest.getNom() );
-			loggedUser.setPrenom( userTest.getPrenom( ));
-			loggedUser.setEmail( userTest.getEmail() );
-			loggedUser.setTelephone( userTest.getTelephone() );
-			loggedUser.setRue( userTest.getRue() );
-			loggedUser.setCodePostal( userTest.getCodePostal() );
-			loggedUser.setVille( userTest.getVille() );
-			loggedUser.setMotDePasse( userTest.getMotDePasse() );
-			loggedUser.setCredit( userTest.getCredit() );
-			loggedUser.setAdministrateur( userTest.getAdministrateur() );
-			this.getServletContext().setAttribute("User", loggedUser);
-			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+		if(identifiant != null && mdp != null) {
+			Utilisateur userTest = managerUtilisateur.getUtilisateurByFields(identifiant, mdp);
+			if(userTest != null) {
+				System.out.println("iciiiiiiiiii");
+				loggedUser.setNoUtilisateur( userTest.getNoUtilisateur() );
+				loggedUser.setPseudo( userTest.getPseudo() );
+				loggedUser.setNom( userTest.getNom() );
+				loggedUser.setPrenom( userTest.getPrenom( ));
+				loggedUser.setEmail( userTest.getEmail() );
+				loggedUser.setTelephone( userTest.getTelephone() );
+				loggedUser.setRue( userTest.getRue() );
+				loggedUser.setCodePostal( userTest.getCodePostal() );
+				loggedUser.setVille( userTest.getVille() );
+				loggedUser.setMotDePasse( userTest.getMotDePasse() );
+				loggedUser.setCredit( userTest.getCredit() );
+				loggedUser.setAdministrateur( userTest.getAdministrateur() );
+				request.getSession().setAttribute("User", loggedUser);
+				request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+			}
+			else {
+				System.out.println("Pas d'utilisateur correspondant");
+			}
 		}
+		
 		
 		else {
 			System.out.println("nulllllllllllll");
