@@ -16,7 +16,7 @@
 <title>
 	<fmt:message key="t_home" bundle="${r}"></fmt:message>
 </title>
-<link rel="stylesheet" href="style.css" type="text/css"/>
+<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body class="body">
 	<nav >
