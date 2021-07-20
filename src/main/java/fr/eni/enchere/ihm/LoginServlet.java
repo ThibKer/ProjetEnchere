@@ -83,8 +83,7 @@ public class LoginServlet extends HttpServlet {
 		else {
 			System.out.println("nulllllllllllll");
 			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
-		}
-			
+		}		
 	}
 	
 	/**
