@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bll.Utilisateur.UtilisateurManager;
-import fr.eni.enchere.bll.Utilisateur.UtilisateurMangerSingl;
+import fr.eni.enchere.bll.Utilisateur.UtilisateurManagerSingl;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.ihm.model.ModelLogged;
 
@@ -19,7 +19,7 @@ import fr.eni.enchere.ihm.model.ModelLogged;
 @WebServlet("/NewUserServlet")
 public class NewUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	UtilisateurManager managerUtilisateur = UtilisateurMangerSingl.getInstance();
+	UtilisateurManager managerUtilisateur = UtilisateurManagerSingl.getInstance();
 	ModelLogged loggedUser;   
 	Utilisateur utilisateur = new Utilisateur();   
     /**
@@ -55,7 +55,8 @@ public class NewUserServlet extends HttpServlet {
 			
 //			managerUtilisateur.checkIfValid(request);
 			
-			if(managerUtilisateur.checkIfValid(request)) {
+			if(managerUtilisateur.checkIfAvalableAndOk(request)) {
+				System.out.println("valide");
 				utilisateur.setPseudo(pseudo);
 				utilisateur.setNom(nom);
 				utilisateur.setPrenom(prenom);
@@ -81,9 +82,9 @@ public class NewUserServlet extends HttpServlet {
 		}
 		else if(btn_annuler != null) {
 			System.out.println("btn_annuler");
-			String referer = request.getHeader("Referer");
+			String referer = request.getHeader("referer");
 			
-			response.sendRedirect(request.getHeader("Referer"));
+			response.sendRedirect(request.getHeader("referer"));
 //			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
 		}
 		else{

@@ -47,7 +47,7 @@
 	  </div>
 	</form>
 	
-	<form action="CreateUserServlet" method="POST" class="f-connect">
+	<form action="NewUserServlet" method="POST" class="f-connect">
 	  <div>
 	    <fmt:message key="btn_creation" bundle="${r}" var="create"/>    
 		<input type="submit" name="new" value="${create}">

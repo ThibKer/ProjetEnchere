@@ -18,4 +18,10 @@ public class CategorieManagerImpl implements CategorieManager {
 	public List<Categorie> getAllCategories() {
 		return dao.getAll();
 	}
+
+	@Override
+	public Categorie getCategorieByLibelle(String categorie) {
+		
+		return dao.getByLibelle(categorie);
+	}
 }

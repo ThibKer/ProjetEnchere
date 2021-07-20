@@ -52,4 +52,30 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		}
 		return true;
 	}
+
+	@Override
+	public boolean checkIfAvalableAndOk(HttpServletRequest request) {
+		if(dao.existPseudo(request.getParameter("pseudo"))) {
+			return false;
+		}
+		if(!request.getParameter("mdp").equals(request.getParameter("mdp2"))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void updateUtilisateur(Utilisateur utilisateur) {
+		dao.update(utilisateur);
+	}
+
+	@Override
+	public void deleteUtilisateur(Integer noUtilisateur) {	
+		dao.delete( dao.getById(noUtilisateur) );		
+	}
+
+	@Override
+	public Utilisateur getUtilisateurById(Integer noUtilisateur) {
+		return dao.getById(noUtilisateur);
+	}
 }

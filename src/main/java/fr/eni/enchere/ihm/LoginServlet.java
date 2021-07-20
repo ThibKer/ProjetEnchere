@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.enchere.bll.Utilisateur.UtilisateurManager;
-import fr.eni.enchere.bll.Utilisateur.UtilisateurMangerSingl;
+import fr.eni.enchere.bll.Utilisateur.UtilisateurManagerSingl;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.ihm.model.ModelLogged;
 
@@ -21,7 +21,7 @@ import fr.eni.enchere.ihm.model.ModelLogged;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	UtilisateurManager managerUtilisateur = UtilisateurMangerSingl.getInstance();
+	UtilisateurManager managerUtilisateur = UtilisateurManagerSingl.getInstance();
     ModelLogged loggedUser = new ModelLogged(); 
     /**
      * @see HttpServlet#HttpServlet()
@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		if(identifiant != null && mdp != null) {
 			Utilisateur userTest = managerUtilisateur.getUtilisateurByFields(identifiant, mdp);
-			if(userTest != null) {
+			if(userTest.getPseudo() != null) {
 				System.out.println("iciiiiiiiiii");
 				loggedUser.setNoUtilisateur( userTest.getNoUtilisateur() );
 				loggedUser.setPseudo( userTest.getPseudo() );
@@ -75,6 +75,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			else {
 				System.out.println("Pas d'utilisateur correspondant");
+				request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
 			}
 		}
 		

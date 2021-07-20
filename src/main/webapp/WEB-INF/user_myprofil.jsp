@@ -49,7 +49,7 @@
 	  	<label for="tel">
 	    	<fmt:message key="l_telephone" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${user.tel}</i>
+	    <i>${user.telephone}</i>
 	  </div>
 	  <div>
 	  	<label for="rue">
@@ -61,7 +61,7 @@
 	  	<label for="postal">
 	    	<fmt:message key="l_codepostal" bundle="${r}"></fmt:message>
 	    </label>
-	    <i>${user.postal}</i>
+	    <i>${user.codePostal}</i>
 	  </div>
 	  <div>
 	  	<label for="ville">
@@ -77,14 +77,18 @@
 		  <i>${user.credit}</i>
 	  </div>
 	  
-	  <div>
-	  	<fmt:message key="btn_retour" bundle="${r}" var="retour"/>	    
-		<input type="submit" name="back" value="${retour}">
-	  </div>
-	  <div>
-	  	<fmt:message key="btn_modifier" bundle="${r}" var="modifier"/>	    
-		<input type="submit" name="upload" value="${modifier}">
-	  </div>
+	  <form action="ProfilServlet" method="POST" class="f-create-user"> 
+		  <div>
+		  	<fmt:message key="btn_retour" bundle="${r}" var="retour"/>	 
+		  	<a href=Javascript:history.go(-1)>   
+				<input type="button" name="back" value="${retour}">
+			</a>
+		  </div>
+		  <div>
+		  	<fmt:message key="btn_modifier" bundle="${r}" var="modifier"/>	    
+			<input type="submit" name="upload" value="${modifier}">
+		  </div>
+	  </form>
 	  
 </body>
 </html>

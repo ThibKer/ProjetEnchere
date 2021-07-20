@@ -36,4 +36,10 @@ public class ArticleVenduMock implements ArticleVenduDAO {
 		return null;
 	}
 
+	@Override
+	public List<ArticleVendu> getByKey(String filtre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

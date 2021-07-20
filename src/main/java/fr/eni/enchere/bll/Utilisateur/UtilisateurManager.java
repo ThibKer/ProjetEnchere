@@ -14,5 +14,9 @@ public interface UtilisateurManager {
 	public Utilisateur getUtilisateurByFields(String identifiant, String mdp);
 	public Utilisateur createUtilisateur(Utilisateur utilisateur);
 	public boolean checkIfValid(HttpServletRequest request);
+	public boolean checkIfAvalableAndOk(HttpServletRequest request);
+	public void updateUtilisateur(Utilisateur utilisateur);
+	public void deleteUtilisateur(Integer noUtilisateur);
+	public Utilisateur getUtilisateurById(Integer noUtilisateur);
 	
 }

@@ -2,6 +2,8 @@ package fr.eni.enchere.bll.Enchere;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import fr.eni.enchere.bo.Enchere;
 
 public interface EnchereManager {

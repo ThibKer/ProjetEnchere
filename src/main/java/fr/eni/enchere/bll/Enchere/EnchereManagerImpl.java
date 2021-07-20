@@ -1,6 +1,9 @@
 package fr.eni.enchere.bll.Enchere;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.dal.FactoryDAO;
@@ -18,4 +21,6 @@ public class EnchereManagerImpl implements EnchereManager {
 	public List<Enchere> getAllEncheres() {
 		return dao.getAll();
 	}
+
+
 }

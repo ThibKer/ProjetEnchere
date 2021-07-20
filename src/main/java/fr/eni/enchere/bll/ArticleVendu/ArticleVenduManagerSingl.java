@@ -1,6 +1,6 @@
 package fr.eni.enchere.bll.ArticleVendu;
 
-public class ArticleVenduMangerSingl {
+public class ArticleVenduManagerSingl {
 
 	private static ArticleVenduManager instance;
 	

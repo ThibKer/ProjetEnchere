@@ -13,13 +13,10 @@ import fr.eni.enchere.dal.ConnectionProvider;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	public String table = "UTILISATEURS";
-	private String INSERT = "INSERT INTO " + table
-			+ "(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private String INSERT = "INSERT INTO " + table + "(pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private String SELECT = "SELECT * FROM " + table;
-	//private String UPDATE = "UPDATE " + table
-	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
-	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
-	private String DELETE = "DELETE * FROM " + table + " WHERE no_utilisateur=?";
+	private String UPDATE = "UPDATE " + table + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=? ";
+	private String DELETE = "DELETE FROM " + table + " WHERE no_utilisateur=?";
 	private String SELECT_ID = "SELECT * FROM " + table + " WHERE no_utilisateur=?";
 	private String SELECT_EMAIL_MDP = "SELECT * FROM " + table + " WHERE email=? AND mot_de_passe=?";
 	private String SELECT_PSEUDO_MDP = "SELECT * FROM " + table + " WHERE pseudo=? AND mot_de_passe=?";
@@ -40,7 +37,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			stmt.setString(9, utilisateur.getMotDePasse());
 			stmt.setInt(10, utilisateur.getCredit());
 			stmt.setString(11, utilisateur.getAdministrateur());
-
 			int nb = stmt.executeUpdate();
 			if (nb > 0) {
 				ResultSet rsk = stmt.getGeneratedKeys();
@@ -48,11 +44,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 					utilisateur.setNoUtilisateur(rsk.getInt(1));
 				}
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -86,11 +80,34 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		return resultat;
 	}
 
-	@Override
-	public void update(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-
-	}
+    @Override
+    public void update(Utilisateur utilisateur) {  
+        try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(UPDATE);
+ 
+			stmt.setString(1, utilisateur.getPseudo());
+			stmt.setString(2, utilisateur.getNom());
+			stmt.setString(3, utilisateur.getPrenom());
+			stmt.setString(4, utilisateur.getEmail());
+			stmt.setString(5, utilisateur.getTelephone());
+			stmt.setString(6, utilisateur.getRue());
+			stmt.setString(7, utilisateur.getCodePostal());
+			stmt.setString(8, utilisateur.getVille());
+			stmt.setString(9, utilisateur.getMotDePasse());
+			stmt.setInt(10, utilisateur.getCredit());
+			stmt.setString(11, utilisateur.getAdministrateur());
+			stmt.setInt(12, utilisateur.getNoUtilisateur());
+             
+			stmt.executeUpdate();
+			
+            System.out.println("User with id " + utilisateur.getNoUtilisateur() + " was updated in DB with following details: " + utilisateur.toString());
+ 
+        } catch (SQLException e) {
+            e.printStackTrace();
+//            throw new RuntimeException(e);
+        }
+         
+    }
 
 	@Override
 	public void delete(Utilisateur utilisateur) {
@@ -99,7 +116,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			stmt.setInt(1, utilisateur.getNoUtilisateur());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			System.err.println("Probleme");
+			e.printStackTrace();
 		}
 
 	}
@@ -123,6 +140,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				res.setMotDePasse(rs.getString("mot_de_passe"));
 				res.setCredit(rs.getInt("credit"));
 				res.setAdministrateur(rs.getString("administrateur"));
+				res.setNoUtilisateur(rs.getInt("no_utilisateur"));			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,6 +168,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				res.setMotDePasse(rs.getString("mot_de_passe"));
 				res.setCredit(rs.getInt("credit"));
 				res.setAdministrateur(rs.getString("administrateur"));
+				res.setNoUtilisateur(rs.getInt("no_utilisateur"));			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,6 +196,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				res.setMotDePasse(rs.getString("mot_de_passe"));
 				res.setCredit(rs.getInt("credit"));
 				res.setAdministrateur(rs.getString("administrateur"));
+				res.setNoUtilisateur(rs.getInt("no_utilisateur"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

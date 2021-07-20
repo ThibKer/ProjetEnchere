@@ -21,7 +21,7 @@
 	   <fmt:message key="st_user_crea" bundle="${r}"></fmt:message>
 	</label>
 
-	<form action="HomeServlet" method="POST" class="f-create-user">
+	<form action="NewUserServlet" method="POST" class="f-create-user">
 	  <div>
 	    <label for="pseudo">
 	    	<fmt:message key="l_pseudo" bundle="${r}"></fmt:message>

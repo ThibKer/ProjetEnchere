@@ -8,5 +8,6 @@ public interface CategorieManager {
 	
 	public void addCategorie(Categorie categorie);
 	public List<Categorie>getAllCategories();
+	public Categorie getCategorieByLibelle(String categorie);
 	
 }

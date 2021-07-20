@@ -21,79 +21,79 @@
 	   <fmt:message key="st_user_profil" bundle="${r}"></fmt:message>
 	</label>
 
-	<form action="HomeServlet" method="POST" class="f-create-user">
+	<form action="ProfilServlet" method="POST" class="f-create-user">
 	  <div>
 	    <label for="pseudo">
 	    	<fmt:message key="l_pseudo" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="pseudo" id="pseudo" required>
+	    <input type="text" name="pseudo" id="pseudo" value='${User.pseudo}'>
 	  </div>
 	  <div>
 	    <label for="nom">
 	    	<fmt:message key="l_nom" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="nom" id="nom" required>
+	    <input type="text" name="nom" id="nom" value='${User.nom}'>
 	  </div>
 	  <div>
 	    <label for="prenom">
 	    	<fmt:message key="l_prenom" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="prenom" id="prenom" required>
+	    <input type="text" name="prenom" id="prenom" value='${User.prenom}'>
 	  </div>
 	  <div>
 	  	<label for="email">
 	    	<fmt:message key="l_email" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="email" name="email" id="email">
+	    <input type="email" name="email" id="email" value='${User.email}'>
 	  </div>
 	  <div>
 	  	<label for="tel">
 	    	<fmt:message key="l_telephone" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="tel" id="tel">
+	    <input type="text" name="tel" id="tel" value='${User.telephone}'>
 	  </div>
 	  <div>
 	  	<label for="rue">
 	    	<fmt:message key="l_rue" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="rue" id="rue">
+	    <input type="text" name="rue" id="rue" value='${User.rue}'>
 	  </div>
 	  <div>
 	  	<label for="postal">
 	    	<fmt:message key="l_codepostal" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="postal" id="postal">
+	    <input type="text" name="postal" id="postal" value='${User.codePostal}'>
 	  </div>
 	  <div>
 	  	<label for="ville">
 	    	<fmt:message key="l_ville" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="text" name="ville" id="ville">
+	    <input type="text" name="ville" id="ville" value='${User.ville}'>
 	  </div>
 	  <div>
 	  	<label for="current_mdp">
 	    	<fmt:message key="l_current_mdp" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="password" name="current_mdp" id="current_mdp">
+	    <input type="password" name="current_mdp" id="current_mdp" placeholder="*****">
 	  </div>
 	  <div>
 	  	<label for="new_mdp">
 	    	<fmt:message key="l_new_mdp" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="password" name="new_mdp" id="new_mdp">
+	    <input type="password" name="new_mdp" id="new_mdp" placeholder="*****">
 	  </div>
 	  <div>
 	  	<label for="mdp2">
 	    	<fmt:message key="l_confirmation" bundle="${r}"></fmt:message>
 	    </label>
-	    <input type="password" name="mdp2" id="mdp2">
+	    <input type="password" name="mdp2" id="mdp2" placeholder="*****">
 	  </div>
 	  
 	  <div>
 		  <label for="credit">
 		    	<fmt:message key="l_credit" bundle="${r}"></fmt:message>
 		  </label>
-		  <i>${user.credit}</i>
+		  <input type="text" name="credit" id="credit" value='${user.credit}' readonly>
 	  </div>
 	  
 	  <div>

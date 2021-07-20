@@ -20,22 +20,23 @@
 </head>
 <body class="body">
 	<nav >
-		<c:if test="${!empty User}">
-			<a href="/loggin">
+		<c:if test="${empty User}">
+			<a href="LoginServlet">
 				<fmt:message key="nav_inscription_connect" bundle="${r}"></fmt:message>
 			</a>
 		</c:if>	
-		<c:if test="${empty User}">
+		<c:if test="${!empty User}">
 			<a href="/encheres">
 				<fmt:message key="nav_encheres" bundle="${r}"></fmt:message>
 			</a>
-			<a href="/vendre">
+			<a href="NewArticleServlet">
 				<fmt:message key="nav_vendre" bundle="${r}"></fmt:message>
 			</a>
-			<a href="/profil">
+			<a href="ProfilServlet?target=me">
 				<fmt:message key="nav_profil" bundle="${r}"></fmt:message>
 			</a>
-			<a href="/deconnection">
+<!-- 			<a href="/deconnection" > -->
+ 			<a href="DeconnectionServlet" >
 				<fmt:message key="nav_deconnexion" bundle="${r}"></fmt:message>
 			</a>
 		</c:if>	
@@ -46,29 +47,29 @@
 	   <fmt:message key="st_home" bundle="${r}"></fmt:message>
 	</label>
 
-	<form action="HomeServlet" method="POST" enctype="multipart/form-data" class="f-create-article">
+	<form action="HomeServlet" method="POST" class="f-create-article">
 	  <div class = "h-filtre">
 	    <label for="filtre">
 	    	<fmt:message key="l_filtre" bundle="${r}"></fmt:message>
 	    </label>
 	    <fmt:message key="ph_filtre" bundle="${r}" var="placeholder"/>     
-	    <input placeholder="${placeholder}" type="search" name="filtre" id="filtre" required>
+	    <input placeholder="${placeholder}" type="search" name="filtre" id="filtre" >
 	  </div>
 	  <div class = "h-categorie">
 	    <label for="categorie">
 	    	<fmt:message key="l_categorie" bundle="${r}"></fmt:message>
 	    </label>
-	    <select name="categorie" id="categorie" required>
+	    <select name="categorie" id="categorie" >
 		    <option value="">
 		    	<fmt:message key="ph_categorie" bundle="${r}"></fmt:message>
 			</option>
-		    <c:forEach var="item" items="${global.categorie}">
-		    	<option value="${item}">${item}</option>
+		    <c:forEach var="item" items="${categories}">
+		    	<option value="${item.libelle}">${item.libelle}</option>
 		    </c:forEach>
 		</select>
 	  </div>
 	  
-	  <c:if test="${empty User}">
+	  <c:if test="${!empty User}">
 		  <div class = "bloc-radio-checkbox">
 		  	<input class="radio bloc-radio-i" onClick="radioEvent(this,'radio','groupventes','groupachats')" type="radio" name="achats" id="achats">
 		    <label for="achats" class="bloc-radio-l">
@@ -127,40 +128,51 @@
 	    <fmt:message key="btn_rechercher" bundle="${r}" var="rechercher"/>   
 		<input type="submit" name="search" value="${rechercher}">
 	  </div>  
+	  <div class = "bouton">
+		<input type="submit" name="test" value="test">
+	  </div>  
 	</form>
 	
 	<section>
 		<c:forEach var="vente" items="${liste}">
+		 <a href="your-link-bio" style="text-decoration:none;">
 			<div class="card">
 				<div>
 					<img alt="" src="">
 				</div>
 				<div>
 					<label for="article">
-				    	<i>${vente.article}</i>
+				    	<i>${vente.nomArticle}</i>
 				    </label>
 					<div>
 					  	<label for="offre">
 					    	<fmt:message key="l_prix" bundle="${r}"></fmt:message>
 					    </label>
 					    <fmt:message key="l_pts" bundle="${r}">
-            				 <fmt:param value="${vente.offre}"/>
+            				 <fmt:param value="${vente.prixVente}"/>
         				</fmt:message>
 					</div>
 					<div>
 					  	<label for="end">
 					    	<fmt:message key="l_end_enchere" bundle="${r}"></fmt:message>
 					    </label>
-					    <i>${vente.fin}</i>
-					 </div>
+					   
+  						<fmt:parseDate value="${vente.dateFinEncheres}" pattern="y-M-dd'T'H:m" var="myParseDate"></fmt:parseDate> 
+						<fmt:formatDate value="${myParseDate}"  pattern="dd MMM yyyy"></fmt:formatDate > 
+						<fmt:message key="sep_prix" bundle="${r}"></fmt:message>
+						<fmt:formatDate value="${myParseDate}"  pattern="HH:mm"></fmt:formatDate >
+					   <%--  <i><fmt:formatDate type = "both" dateStyle = "long" timeStyle = "long" value = "${vente.dateFinEncheres}" /></i>
+     					<i><fmt:formatDate pattern = "yyyy-MM-dd" value = "${vente.dateFinEncheres}" /></i> --%>
+   					 </div>
 					 <div>
 					  	<label for="vendeur">
 					    	<fmt:message key="l_vendeur" bundle="${r}"></fmt:message>
 					    </label>
-					    <i>${vente.vendeur.name}</i>
+					    <a href="ProfilServlet?target=${vente.utilisateur.getNoUtilisateur()}">${vente.utilisateur.getPseudo()}</a>
 					 </div>
 				</div>
 			</div>
+			</a>
 		</c:forEach>
 	</section>
 

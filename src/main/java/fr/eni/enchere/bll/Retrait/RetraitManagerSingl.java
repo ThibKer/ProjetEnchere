@@ -1,6 +1,6 @@
 package fr.eni.enchere.bll.Retrait;
 
-public class RetraitMangerSingl {
+public class RetraitManagerSingl {
 
 	private static RetraitManager instance;
 	

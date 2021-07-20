@@ -16,9 +16,8 @@ import fr.eni.enchere.dal.ArticleVendu.ArticleVenduDAO;
 public class RetraitDAOImpl implements RetraitDAO {
 	private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
 	
-	public String table = "ARTICLES_VENDUS";
-	private String INSERT = "INSERT INTO " + table
-			+ "(no_article,rue,code_postal,ville) VALUES (?,?,?,?)";
+	public String table = "RETRAITS";
+	private String INSERT = "INSERT INTO " + table + "(no_article, rue, code_postal, ville) VALUES (?,?,?,?)";
 	private String SELECT = "SELECT * FROM " + table;
 	// private String UPDATE = "UPDATE " + table
 	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
@@ -33,9 +32,8 @@ public class RetraitDAOImpl implements RetraitDAO {
 			stmt.setString(2, retrait.getRue());
 			stmt.setString(3, retrait.getCode_postal());
 			stmt.setString(4, retrait.getVille());
-			
-			
-
+			stmt.executeQuery();
+			System.out.println("DAO retrait");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

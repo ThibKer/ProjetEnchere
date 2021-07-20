@@ -35,4 +35,10 @@ public class CategorieMock implements CategorieDAO {
 		return null;
 	}
 
+	@Override
+	public Categorie getByLibelle(String categorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

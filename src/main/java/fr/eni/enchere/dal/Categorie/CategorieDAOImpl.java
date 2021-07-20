@@ -16,6 +16,8 @@ public class CategorieDAOImpl implements CategorieDAO {
 	public String table = "CATEGORIES";
 	private String INSERT = "INSERT INTO " + table + "(libelle) VALUES (?)";
 	private String SELECT = "SELECT * FROM " + table;
+	private String SELECT_ID = "SELECT * FROM " + table + " WHERE no_categorie=?";
+	private String SELECT_LIBELLE = "SELECT * FROM " + table + " WHERE libelle=?";
 	// private String UPDATE = "UPDATE " + table
 	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
 	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
@@ -84,8 +86,37 @@ public class CategorieDAOImpl implements CategorieDAO {
 
 	@Override
 	public Categorie getById(Integer integer) {
-		// TODO getById
-		return null;
+		Categorie categorie = new Categorie();
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(SELECT_ID);
+			stmt.setInt(1, integer);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return categorie;
+	}
+
+	@Override
+	public Categorie getByLibelle(String libelle) {
+		Categorie categorie = new Categorie();
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(SELECT_LIBELLE);
+			stmt.setString(1, libelle);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {		
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return categorie;
 	}
 
 }

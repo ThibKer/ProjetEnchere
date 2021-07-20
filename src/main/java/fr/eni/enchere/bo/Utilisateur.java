@@ -32,18 +32,19 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private Integer credit = 100;
+	private Integer credit;
 	private String administrateur = "";
-	private List<ArticleVendu> articlesVendus = new ArrayList<>();
-	private List<Enchere> encheres = new ArrayList<>();
+	private List<ArticleVendu> articlesVendus;
+	private List<Enchere> encheres;
 
 	public Utilisateur() {
-		super();
+		this.credit = 100;
+		this.articlesVendus = new ArrayList<>();
+		this.encheres = new ArrayList<>();
 	}
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, Integer credit, String administrateur,
-			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
+			String codePostal, String ville, String motDePasse, Integer credit, String administrateur) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -56,28 +57,16 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
-		this.articlesVendus = articlesVendus;
-		this.encheres = encheres;
+		this.articlesVendus = new ArrayList<>();
+		this.encheres = new ArrayList<>();
 	}
 
 	public Utilisateur(Integer noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, Integer credit, String administrateur,
-			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
-		super();
+			String rue, String codePostal, String ville, String motDePasse, Integer credit, String administrateur) {
+		this( pseudo,  nom,  prenom,  email,  telephone,
+				 rue,  codePostal,  ville, motDePasse, credit, administrateur);
 		this.noUtilisateur = noUtilisateur;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.rue = rue;
-		this.codePostal = codePostal;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;
-		this.articlesVendus = articlesVendus;
-		this.encheres = encheres;
+		
 	}
 
 	public Integer getNoUtilisateur() {

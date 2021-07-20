@@ -1,6 +1,6 @@
 package fr.eni.enchere.bll.Enchere;
 
-public class EnchereMangerSingl {
+public class EnchereManagerSingl {
 
 	private static EnchereManager instance;
 	

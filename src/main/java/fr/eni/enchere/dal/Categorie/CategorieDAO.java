@@ -13,5 +13,6 @@ public interface CategorieDAO extends DAO<Categorie> {
 	public void delete(Categorie categorie);
 	
 	public Categorie getById(Integer integer);
+	public Categorie getByLibelle(String categorie);
 
 }
