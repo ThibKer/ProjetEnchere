@@ -48,6 +48,7 @@
 	</label>
 
 	<form action="HomeServlet" method="POST" class="f-create-article">
+	<div class="f-container">
 	  <div class = "h-filtre">
 	    <label for="filtre">
 	    	<fmt:message key="l_filtre" bundle="${r}"></fmt:message>
@@ -69,6 +70,7 @@
 		</select>
 	  </div>
 	  
+	  <div class="f-container34">
 	  <c:if test="${!empty User}">
 		  <div class = "bloc-radio-checkbox">
 		  	<input class="radio bloc-radio-i" onClick="radioEvent(this,'radio','groupventes','groupachats')" type="radio" name="achats" id="achats">
@@ -124,12 +126,11 @@
 		    </div>
 		  </div>
 		</c:if>
+		</div>
+	</div>
 	  <div class = "bouton">
 	    <fmt:message key="btn_rechercher" bundle="${r}" var="rechercher"/>   
 		<input type="submit" name="search" value="${rechercher}">
-	  </div>  
-	  <div class = "bouton">
-		<input type="submit" name="test" value="test">
 	  </div>  
 	</form>
 	

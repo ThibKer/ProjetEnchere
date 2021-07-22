@@ -15,6 +15,7 @@
 <title>
 	<fmt:message key="t_vente" bundle="${r}"></fmt:message>
 </title>
+<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
 	<label for="st">

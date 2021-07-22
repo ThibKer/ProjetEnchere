@@ -15,14 +15,20 @@
 <title>
 	<fmt:message key="t_vente" bundle="${r}"></fmt:message>
 </title>
+<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
-	<label for="st">
+	<label for="st" class="na-st">
 	   <fmt:message key="st_vente_new" bundle="${r}"></fmt:message>
 	</label>
 
-	<form action="NewArticleServlet" method="POST" class="f-create-article">
-	  <div>
+	<form action="NewArticleServlet" method="POST" class="f-new-article">
+	
+	<div class="na-gauche">
+	
+	</div>
+	<div class="na-droite">
+		 <div>
 	    <label for="article">
 	    	<fmt:message key="l_article" bundle="${r}"></fmt:message>
 	    </label>
@@ -48,10 +54,7 @@
 		    </c:forEach>
 		</select>
 	  </div>
-	  
-	  
-	  
-	  <div>
+	    <div>
 	  	<label for="photo">
 	    	<fmt:message key="l_photo" bundle="${r}"></fmt:message>
 	    </label>
@@ -113,6 +116,12 @@
 			<input type="button" name="cancel" value="${annuler}">
 		</a> 
 	  </div>
+	  
+	</div>
+	 
+	  
+	  
+	
 	  
 	</form>
 	

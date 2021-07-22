@@ -15,12 +15,13 @@
 <title>
 	<fmt:message key="t_user_profil" bundle="${r}"></fmt:message>
 </title>
+<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
-	<label for="st">
+	<label for="st" class="mp-st">
 	   <fmt:message key="st_user_profil" bundle="${r}"></fmt:message>
 	</label>
-	
+	<div class="mp-container">
 	  <div>
 	    <label for="pseudo">
 	    	<fmt:message key="l_pseudo" bundle="${r}"></fmt:message>
@@ -76,8 +77,8 @@
 		  </label>
 		  <i>${user.credit}</i>
 	  </div>
-	  
-	  <form action="ProfilServlet" method="POST" class="f-create-user"> 
+	  </div>
+	  <form action="ProfilServlet" method="POST" class="f-myprofil"> 
 		  <div>
 		  	<fmt:message key="btn_retour" bundle="${r}" var="retour"/>	 
 		  	<a href=Javascript:history.go(-1)>   
