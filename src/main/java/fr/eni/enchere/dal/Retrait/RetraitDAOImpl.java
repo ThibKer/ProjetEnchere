@@ -19,9 +19,6 @@ public class RetraitDAOImpl implements RetraitDAO {
 	public String table = "RETRAITS";
 	private String INSERT = "INSERT INTO " + table + "(no_article, rue, code_postal, ville) VALUES (?,?,?,?)";
 	private String SELECT = "SELECT * FROM " + table;
-	// private String UPDATE = "UPDATE " + table
-	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
-	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
 	private String DELETE = "DELETE * FROM " + table + " where no_article=?";
 
 	@Override
@@ -33,11 +30,9 @@ public class RetraitDAOImpl implements RetraitDAO {
 			stmt.setString(3, retrait.getCode_postal());
 			stmt.setString(4, retrait.getVille());
 			stmt.executeQuery();
-			System.out.println("DAO retrait");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -47,27 +42,22 @@ public class RetraitDAOImpl implements RetraitDAO {
 			PreparedStatement stmt = connection.prepareStatement(SELECT);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				Retrait retrait = new Retrait();
-				
+				Retrait retrait = new Retrait();		
 				retrait.setArticle(daoA.getById(Integer.parseInt(rs.getString("no_article"))));				
 				retrait.setRue(rs.getString("rue"));
 				retrait.setCode_postal(rs.getString("code_postal"));
 				retrait.setVille(rs.getString("ville"));
-				
 				resultat.add(retrait);
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return resultat;
 	}
 
 	@Override
 	public void update(Retrait retrait) {
-		// TODO Auto-generated method stub
-
+		// UPDATE WAS NOT IMPLEMENTED FOR 'RETRAIT'
 	}
 
 	@Override
@@ -77,10 +67,9 @@ public class RetraitDAOImpl implements RetraitDAO {
 			stmt.setInt(1, retrait.getArticle().getNoArticle());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			System.err.println("Probleme");
+			e.printStackTrace();
 		}
-
 	}
-	}
+}
 
 

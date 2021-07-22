@@ -16,8 +16,7 @@ public class ModelLogged {
 	private Integer credit;
 	private String administrateur;
 	
-	public ModelLogged() {
-		
+	public ModelLogged() {	
 	}
 
 	public ModelLogged(Utilisateur utilisateur) {

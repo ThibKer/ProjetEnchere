@@ -25,6 +25,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
+		System.out.println("->>>>INSERT");
 		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, utilisateur.getPseudo());
@@ -68,16 +69,12 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				utilisateur.setVille(rs.getString("ville"));
 				utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 				utilisateur.setCredit(rs.getInt("credit"));
-				utilisateur.setAdministrateur(rs.getString("administrateur"));
-				
+				utilisateur.setAdministrateur(rs.getString("administrateur"));		
 				resultat.add(utilisateur);
-			
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return resultat;
 	}
 
@@ -85,7 +82,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     public void update(Utilisateur utilisateur) {  
         try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(UPDATE);
- 
 			stmt.setString(1, utilisateur.getPseudo());
 			stmt.setString(2, utilisateur.getNom());
 			stmt.setString(3, utilisateur.getPrenom());
@@ -97,17 +93,12 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			stmt.setString(9, utilisateur.getMotDePasse());
 			stmt.setInt(10, utilisateur.getCredit());
 			stmt.setString(11, utilisateur.getAdministrateur());
-			stmt.setInt(12, utilisateur.getNoUtilisateur());
-             
-			stmt.executeUpdate();
-			
-            System.out.println("User with id " + utilisateur.getNoUtilisateur() + " was updated in DB with following details: " + utilisateur.toString());
- 
+			stmt.setInt(12, utilisateur.getNoUtilisateur());   
+			stmt.executeUpdate();	
+//            System.out.println("User with id " + utilisateur.getNoUtilisateur() + " was updated in DB with following details: " + utilisateur.toString());
         } catch (SQLException e) {
             e.printStackTrace();
-//            throw new RuntimeException(e);
-        }
-         
+        }    
     }
 
 	@Override
@@ -212,7 +203,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			stmt.setString(1, pseudo);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {	
-//				System.out.println(rs.next());
 				return true;
 			}
 		} catch (SQLException e) {

@@ -31,7 +31,7 @@
 	    </label>
 	    <input type="password" name="mdp" id="mdp" required>
 	  </div>
-	  <div>
+	  <div style="display:none">
 	    <input type="checkbox" name="souvenir" id="souvenir">
 	    <label for="souvenir">
 	    	<fmt:message key="l_cb_souvenir" bundle="${r}"></fmt:message>
@@ -41,7 +41,7 @@
 	  	<fmt:message key="btn_connexion" bundle="${r}" var="connect"/>	    
 		<input type="submit" name="go" value="${connect}">
 	  </div>
-	  <div>
+	  <div style="display:none">
 	    <fmt:message key="h_mdp_lost" bundle="${r}" var="lost"/>   
 		<input type="submit" name="lost" value="${lost}">
 	  </div>

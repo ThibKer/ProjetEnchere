@@ -21,8 +21,7 @@ public class UtilisateurMock implements UtilisateurDAO {
 
 	@Override
 	public void update(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-
+		// inactif
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class UtilisateurMock implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur getById(Integer integer) {
-		// TODO getById
+		// inactif
 		return null;
 	}
 
@@ -59,13 +58,13 @@ public class UtilisateurMock implements UtilisateurDAO {
 
 	@Override
 	public boolean existPseudo(String pseudo) {
-		// TODO Auto-generated method stub
+		// inactif
 		return false;
 	}
 
 	@Override
 	public boolean existEmail(String parameter) {
-		// TODO Auto-generated method stub
+		// inactif
 		return false;
 	}
 

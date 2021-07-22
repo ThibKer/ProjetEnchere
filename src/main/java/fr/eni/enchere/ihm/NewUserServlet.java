@@ -2,6 +2,7 @@ package fr.eni.enchere.ihm;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,7 @@ public class NewUserServlet extends HttpServlet {
 	UtilisateurManager managerUtilisateur = UtilisateurManagerSingl.getInstance();
 	ModelLogged loggedUser;   
 	Utilisateur utilisateur = new Utilisateur();   
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,20 +43,12 @@ public class NewUserServlet extends HttpServlet {
 		String rue = request.getParameter("rue");
 		String codepostal = request.getParameter("postal");
 		String ville = request.getParameter("ville");
-		String mdp = request.getParameter("mdp");
-		String mdpconfirm = request.getParameter("mdp2");
-		
+		String mdp = request.getParameter("mdp");	
 		String btn_creation = request.getParameter("create");
 		String btn_annuler = request.getParameter("cancel");
-		if(btn_creation != null) {
-			
-			
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/user_creation.jsp");;
+		if(btn_creation != null) {		
 			System.out.println("btn_creation");
-			
-//			managerUtilisateur.checkIfDispo(pseudo);
-			
-//			managerUtilisateur.checkIfValid(request);
-			
 			if(managerUtilisateur.checkIfAvalableAndOk(request)) {
 				System.out.println("valide");
 				utilisateur.setPseudo(pseudo);
@@ -67,43 +61,19 @@ public class NewUserServlet extends HttpServlet {
 				utilisateur.setVille(ville);
 				utilisateur.setMotDePasse(mdp);
 				utilisateur.setCredit(100);
-				
-//						System.out.println("user : "+utilisateur);
-//				try {
-//					managerUtilisateur.addUtilisateur( utilisateur );
-//
-//				}finally {
-//					request.getRequestDispatcher("LoginServlet?"
-//							+"identifiant="+utilisateur.getPseudo()
-//							+",mdp="+utilisateur.getMotDePasse()
-//							).forward(request, response);
-//				}
-				managerUtilisateur.addUtilisateur( utilisateur );
-
-				
-				loggedUser = new ModelLogged( managerUtilisateur.getUtilisateurByFields(pseudo, mdp) );
-				loggedUser = new ModelLogged(managerUtilisateur.createUtilisateur( utilisateur ));
-						System.out.println("Logged : "+loggedUser);	
-						
+				loggedUser = new ModelLogged( managerUtilisateur.createUtilisateur( utilisateur ));
 				request.getSession().setAttribute("User", loggedUser);
-				request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+				rd = request.getRequestDispatcher("WEB-INF/home.jsp");
 			}
 			else {
-				request.getRequestDispatcher("WEB-INF/user_creation.jsp").forward(request, response);
+				rd = request.getRequestDispatcher("WEB-INF/user_creation.jsp");
 			}
-			
-			
 		}
 		else if(btn_annuler != null) {
-			System.out.println("btn_annuler");
 			String referer = request.getHeader("referer");
-			
-			response.sendRedirect(request.getHeader("referer"));
-//			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+			response.sendRedirect(referer);
 		}
-		else{
-			request.getRequestDispatcher("WEB-INF/user_creation.jsp").forward(request, response);
-		}
+		rd.forward(request, response);
 	}
 
 	/**

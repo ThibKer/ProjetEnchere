@@ -16,26 +16,20 @@ private Utilisateur utilisateur;
 private ArticleVendu ArticleVendu;
 
 public Enchere() {
-	super();
 }
 
 public Enchere(LocalDateTime dateEnchere, Integer montant_Enchere, Utilisateur utilisateur,
-		fr.eni.enchere.bo.ArticleVendu articleVendu) {
-	super();
+		ArticleVendu articleVendu) {
 	this.dateEnchere = dateEnchere;
 	this.montant_Enchere = montant_Enchere;
 	this.utilisateur = utilisateur;
-	ArticleVendu = articleVendu;
+	this.ArticleVendu = articleVendu;
 }
 
 public Enchere(LocalDateTime dateEnchere, Integer montant_Enchere, Integer noEnchere, Utilisateur utilisateur,
-		fr.eni.enchere.bo.ArticleVendu articleVendu) {
-	super();
-	this.dateEnchere = dateEnchere;
-	this.montant_Enchere = montant_Enchere;
+		ArticleVendu articleVendu) {
+	this(dateEnchere, montant_Enchere, utilisateur, articleVendu);
 	this.noEnchere = noEnchere;
-	this.utilisateur = utilisateur;
-	ArticleVendu = articleVendu;
 }
 
 public LocalDateTime getDateEnchere() {
@@ -89,8 +83,8 @@ public String toString() {
 	builder.append(noEnchere);
 	builder.append(", utilisateur=");
 	builder.append(utilisateur);
-//	builder.append(", ArticleVendu=");
-//	builder.append(ArticleVendu);
+	builder.append(", ArticleVendu=");
+	builder.append(ArticleVendu);
 	builder.append("]");
 	return builder.toString();
 }

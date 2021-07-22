@@ -30,16 +30,15 @@ public class ArticleVendu {
 	private Utilisateur utilisateur;
 	private Categorie categorie;
 	private Retrait retrait;
-	private List<Enchere> encheres = new ArrayList<>();
+	private List<Enchere> encheres;
 
 	public ArticleVendu() {
-		super();
+		this.encheres = new ArrayList<>();
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFineEncheres, Integer miseAPrix, Integer prixVente, String etatVente,
-			Utilisateur utilisateur, Categorie categorie, Retrait retrait, List<Enchere> encheres) {
-		super();
+			Utilisateur utilisateur, Categorie categorie, Retrait retrait) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
@@ -50,25 +49,14 @@ public class ArticleVendu {
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 		this.retrait = retrait;
-		this.encheres = encheres;
+		this.encheres = new ArrayList<>();
 	}
 
 	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFineEncheres, Integer miseAPrix, Integer prixVente, String etatVente,
-			Utilisateur utilisateur, Categorie categorie, Retrait retrait, List<Enchere> encheres) {
-		super();
+			Utilisateur utilisateur, Categorie categorie, Retrait retrait) {
+		this(nomArticle, description, dateDebutEncheres, dateFineEncheres, miseAPrix, prixVente, etatVente, utilisateur, categorie, retrait);
 		this.noArticle = noArticle;
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.dateFinEncheres = dateFineEncheres;
-		this.miseAPrix = miseAPrix;
-		this.prixVente = prixVente;
-		this.etatVente = etatVente;
-		this.utilisateur = utilisateur;
-		this.categorie = categorie;
-		this.retrait = retrait;
-		this.encheres = encheres;
 	}
 
 	public Integer getNoArticle() {

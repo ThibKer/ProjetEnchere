@@ -9,7 +9,6 @@
 		<fmt:setLocale value="${locale}"/>
 	</c:if>
 	<fmt:setBundle basename="fr.eni.enchere.ihm.label.label" var="r"/>
-
 <head>
 <meta charset="ISO-8859-1">
 <title>

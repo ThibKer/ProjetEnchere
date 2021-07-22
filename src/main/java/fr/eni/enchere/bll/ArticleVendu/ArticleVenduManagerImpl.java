@@ -30,34 +30,22 @@ public class ArticleVenduManagerImpl implements ArticleVenduManager {
 		String prix = request.getParameter("prix");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
-		System.out.println("lalal " + article);
-		System.out.println(description);
-		System.out.println(categorie);
-		System.out.println(prix);
-		System.out.println(start);
-		System.out.println(end);
 		if("".equals(article) || article == null) {
-			System.out.println(article);
 			return false;
 		}
 		if("".equals(description) || description == null) {
-			System.out.println(description);
 			return false;
 		}
 		if("".equals(categorie) || categorie == null) {
-			System.out.println(categorie);
 			return false;
 		} 
 		if("".equals(prix) || prix == null) {
-			System.out.println(prix);
 			return false;
 		}
 		if("".equals(start) || start == null) {
-			System.out.println(start);
 			return false;
 		}
 		if("".equals(end) || end == null) {
-			System.out.println(end);
 			return false;
 		}
 		return true;
@@ -71,5 +59,15 @@ public class ArticleVenduManagerImpl implements ArticleVenduManager {
 	@Override
 	public ArticleVendu getArticleById(Integer articleId) {
 		return dao.getById(articleId);
+	}
+
+	@Override
+	public List<ArticleVendu> getAllAchatsForUserId(Integer noUtilisateur) {
+		return dao.getAllAchatsByUserId(noUtilisateur);
+	}
+
+	@Override
+	public List<ArticleVendu> getAllVentesForUserId(Integer noUtilisateur) {
+		return dao.getAllVentessByUserId(noUtilisateur);
 	}
 }

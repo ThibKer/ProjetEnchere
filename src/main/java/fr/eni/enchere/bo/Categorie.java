@@ -13,23 +13,20 @@ public class Categorie {
 	 */
 private Integer noCategorie;
 private String libelle;
-private List<ArticleVendu> articles = new ArrayList<>();
+private List<ArticleVendu> articles;
 
 public Categorie() {
-	super();
+	articles = new ArrayList<>();
 }
 
-public Categorie(String libelle, List<ArticleVendu> articles) {
-	super();
+public Categorie(String libelle) {
 	this.libelle = libelle;
-	this.articles = articles;
+	this.articles = new ArrayList<>();
 }
 
-public Categorie(Integer noCategorie, String libelle, List<ArticleVendu> articles) {
-	super();
+public Categorie(Integer noCategorie, String libelle) {
+	this(libelle);
 	this.noCategorie = noCategorie;
-	this.libelle = libelle;
-	this.articles = articles;
 }
 
 public Integer getNoCategorie() {

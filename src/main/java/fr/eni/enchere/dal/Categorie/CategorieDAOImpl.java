@@ -18,9 +18,7 @@ public class CategorieDAOImpl implements CategorieDAO {
 	private String SELECT = "SELECT * FROM " + table;
 	private String SELECT_ID = "SELECT * FROM " + table + " WHERE no_categorie=?";
 	private String SELECT_LIBELLE = "SELECT * FROM " + table + " WHERE libelle=?";
-	// private String UPDATE = "UPDATE " + table
-	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
-	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
+	private String UPDATE = "UPDATE " + table + " SET libelle=? WHERE no_categorie=?";
 	private String DELETE = "DELETE * FROM " + table + " where no_categorie=?";
 
 	@Override
@@ -28,8 +26,6 @@ public class CategorieDAOImpl implements CategorieDAO {
 		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, categorie.getLibelle());
-			
-
 			int nb = stmt.executeUpdate();
 			if (nb > 0) {
 				ResultSet rsk = stmt.getGeneratedKeys();
@@ -37,11 +33,9 @@ public class CategorieDAOImpl implements CategorieDAO {
 					categorie.setNoCategorie(rsk.getInt(1));
 				}
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -53,21 +47,24 @@ public class CategorieDAOImpl implements CategorieDAO {
 			while (rs.next()) {
 				Categorie categorie = new Categorie();
 				categorie.setLibelle(rs.getString("libelle"));
-				
 				resultat.add(categorie);
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return resultat;
 	}
 
 	@Override
 	public void update(Categorie categorie) {
-		// TODO Auto-generated method stub
-
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(UPDATE);
+			stmt.setString(1, categorie.getLibelle());
+			stmt.setInt(1, categorie.getNoCategorie());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -77,12 +74,9 @@ public class CategorieDAOImpl implements CategorieDAO {
 			stmt.setInt(1, categorie.getNoCategorie());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			System.err.println("Probleme");
+			e.printStackTrace();
 		}
-
 	}
-
-	
 
 	@Override
 	public Categorie getById(Integer integer) {
@@ -98,7 +92,6 @@ public class CategorieDAOImpl implements CategorieDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return categorie;
 	}
 
@@ -118,5 +111,4 @@ public class CategorieDAOImpl implements CategorieDAO {
 		}
 		return categorie;
 	}
-
 }

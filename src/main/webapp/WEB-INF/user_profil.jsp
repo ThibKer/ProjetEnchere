@@ -91,11 +91,9 @@
 	  </form>
 	  
 	<c:if test="${empty full}">
-	console.dir(document.body);
 		<script type="text/javascript">
 			var block=document.getElementsByClassName('personal');
 			for(var i=0;i<block.length;i++){
-				console.log();
 				block[i].style.display = "none";	
 			}
 		</script>

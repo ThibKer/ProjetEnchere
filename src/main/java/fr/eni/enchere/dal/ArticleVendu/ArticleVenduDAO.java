@@ -14,5 +14,7 @@ public interface ArticleVenduDAO extends DAO<ArticleVendu> {
 	public ArticleVendu getById(Integer integer);
 	public List<ArticleVendu> getByKey(String filtre);
 	public void updatePrice(Integer noArticle, Integer new_montant);
+	public List<ArticleVendu> getAllAchatsByUserId(Integer noUtilisateur);
+	public List<ArticleVendu> getAllVentessByUserId(Integer noUtilisateur);
 
 }

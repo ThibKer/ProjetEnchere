@@ -14,11 +14,9 @@ private String ville;
 private ArticleVendu article;
 
 public Retrait() {
-	super();
 }
 
 public Retrait(String rue, String code_postal, String ville, ArticleVendu article) {
-	super();
 	this.rue = rue;
 	this.code_postal = code_postal;
 	this.ville = ville;
@@ -66,8 +64,6 @@ public String toString() {
 	builder.append(code_postal);
 	builder.append(", ville=");
 	builder.append(ville);
-	builder.append(", article=");
-	builder.append(article);
 	builder.append("]");
 	return builder.toString();
 }

@@ -13,5 +13,7 @@ public interface ArticleVenduManager {
 	public boolean checkIfValid(HttpServletRequest request);
 	public List<ArticleVendu> findByKey(String filtre);
 	public ArticleVendu getArticleById(Integer articleId);
+	public List<ArticleVendu> getAllAchatsForUserId(Integer noUtilisateur);
+	public List<ArticleVendu> getAllVentesForUserId(Integer noUtilisateur);
 	
 }

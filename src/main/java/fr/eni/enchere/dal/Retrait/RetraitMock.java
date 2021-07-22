@@ -20,8 +20,7 @@ public class RetraitMock implements RetraitDAO {
 
 	@Override
 	public void update(Retrait retrait) {
-		// TODO Auto-generated method stub
-
+		// inactif
 	}
 
 	@Override

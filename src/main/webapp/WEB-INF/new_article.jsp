@@ -51,7 +51,7 @@
 	  
 	  
 	  
-	  <div>
+	  <div style="display:none">
 	  	<label for="photo">
 	    	<fmt:message key="l_photo" bundle="${r}"></fmt:message>
 	    </label>
@@ -77,10 +77,10 @@
 	    <input type="date" name="end" id="end">
 	  </div>
 	  
-	  <div id="vente-retrait">
-	  	<label for="retrait">
+	  <FieldSet id="vente-retrait">
+	  	<Legend>
 		    <fmt:message key="l_retrait" bundle="${r}"></fmt:message>
-		</label>
+		</Legend>
 	  
 	  	<div>
 		  	<label for="rue">
@@ -100,7 +100,7 @@
 		    </label>
 		    <input type="text" name="ville" id="ville" value="${User.ville}">
 	    </div>
-	  </div>
+	  </FieldSet>
 	  
 
 	  <div>

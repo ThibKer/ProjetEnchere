@@ -20,8 +20,7 @@ public class EnchereMock implements EnchereDAO {
 
 	@Override
 	public void update(Enchere enchere) {
-		// TODO Auto-generated method stub
-
+		// inactif
 	}
 
 	@Override
@@ -32,8 +31,14 @@ public class EnchereMock implements EnchereDAO {
 
 	@Override
 	public List<Enchere> getByUserId(Integer userId) {
-		// TODO Auto-generated method stub
+		// inactif
 		return null;
+	}
+
+	@Override
+	public boolean checkIfExist(Enchere enchere) {
+		// inactif
+		return false;
 	}
 
 

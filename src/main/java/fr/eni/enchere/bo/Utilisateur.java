@@ -45,7 +45,6 @@ public class Utilisateur {
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, Integer credit, String administrateur) {
-		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;

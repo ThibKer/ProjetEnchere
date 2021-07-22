@@ -1,8 +1,8 @@
 package fr.eni.enchere.ihm;
 
 import java.io.IOException;
-import java.util.Locale;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +20,9 @@ import fr.eni.enchere.ihm.model.ModelLogged;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	UtilisateurManager managerUtilisateur = UtilisateurManagerSingl.getInstance();
     ModelLogged loggedUser = new ModelLogged(); 
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,30 +33,22 @@ public class LoginServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
 //    	this.getServletContext().setAttribute("locale", Locale.ENGLISH);
-//    	this.getServletContext().setAttribute("User", "some");
     }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Object loggin = request.getSession().getAttribute("User");
-		String go = request.getParameter("go");
-		
+		String go = request.getParameter("go");	
 		String identifiant = request.getParameter("identifiant");
 		String mdp = request.getParameter("mdp");
-		
-		
-		System.out.println(identifiant);
-		System.out.println(mdp);
-		System.out.println(go);
-		System.out.println(loggin);
+		RequestDispatcher rd;
 		if(loggin != null && go != null) {
-			System.out.println("laaaaaa");
-			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);	
+			rd = request.getRequestDispatcher("WEB-INF/home.jsp");	
 		}
 		if(identifiant != null && mdp != null) {
 			Utilisateur userTest = managerUtilisateur.getUtilisateurByFields(identifiant, mdp);
-			System.out.println("user test rempli ?? :" +userTest);
 			if(userTest.getPseudo() != null) {
 				System.out.println("iciiiiiiiiii");
 				loggedUser.setNoUtilisateur( userTest.getNoUtilisateur() );
@@ -72,26 +64,24 @@ public class LoginServlet extends HttpServlet {
 				loggedUser.setCredit( userTest.getCredit() );
 				loggedUser.setAdministrateur( userTest.getAdministrateur() );
 				request.getSession().setAttribute("User", loggedUser);
-				request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+				rd = request.getRequestDispatcher("WEB-INF/home.jsp");
 			}
 			else {
-				System.out.println("Pas d'utilisateur correspondant");
-				request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+				// TODO err pas d'utilisateur correspondant
+				rd = request.getRequestDispatcher("WEB-INF/login.jsp");
 			}
 		}
-		
-		
 		else {
-			System.out.println("nulllllllllllll");
-			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+			// TODO probleme de saisi
+			rd = request.getRequestDispatcher("WEB-INF/login.jsp");
 		}		
+		rd.forward(request, response);
 	}
 	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

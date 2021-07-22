@@ -22,15 +22,14 @@ import fr.eni.enchere.dal.ArticleVendu.ArticleVenduDAO;
 import fr.eni.enchere.dal.Utilisateur.UtilisateurDAO;
 
 public class EnchereDAOImpl implements EnchereDAO {
-private static UtilisateurDAO daoU = FactoryDAO.getUtilisateurDAO();
-private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
-
+	private static UtilisateurDAO daoU = FactoryDAO.getUtilisateurDAO();
+	private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
+	
 	public String table = "ENCHERES";
 	private String INSERT = "INSERT INTO " + table + "(date_enchere,montant_enchere,no_article,no_utilisateur) VALUES (?,?,?,?)";
 	private String SELECT = "SELECT * FROM " + table;
-	// private String UPDATE = "UPDATE " + table
-	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
-	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
+	private String UPDATE = "UPDATE " + table + " SET date_enchere=?,montant_enchere=? WHERE no_article=? AND no_utilisateur=?";
+	private String EXIST = "SELECT * FROM " + table + " WHERE no_article=? AND no_utilisateur=?";
 	private String DELETE = "DELETE * FROM " + table + " where no_enchere=?";
 
 	@Override
@@ -40,8 +39,7 @@ private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
 			stmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
 			stmt.setInt(2, enchere.getMontant_Enchere());
 			stmt.setInt(3, enchere.getArticleVendu().getNoArticle());
-			stmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
-				
+			stmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());		
 			int nb = stmt.executeUpdate();
 			if (nb > 0) {
 				ResultSet rsk = stmt.getGeneratedKeys();
@@ -52,10 +50,7 @@ private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
-	
-	
 
 	@Override
 	public List<Enchere> getAll() {
@@ -65,28 +60,30 @@ private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Enchere enchere = new Enchere();
-				
 				enchere.setDateEnchere(Timestamp.valueOf(rs.getString("date_enchere")).toLocalDateTime());
 				enchere.setMontant_Enchere(rs.getInt("montant_enchere"));
-				
 				enchere.setUtilisateur(daoU.getById(Integer.parseInt(rs.getString("no_utilisateur"))));
 				enchere.setArticleVendu(daoA.getById(Integer.parseInt(rs.getString("no_article"))));
-				
-				
 				resultat.add(enchere);
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return resultat;
 	}
 
 	@Override
 	public void update(Enchere enchere) {
-		// TODO Auto-generated method stub
-
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(UPDATE);
+			stmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+			stmt.setInt(2, enchere.getMontant_Enchere());
+			stmt.setInt(3, enchere.getArticleVendu().getNoArticle());	
+			stmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());	
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -96,12 +93,9 @@ private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
 			stmt.setInt(1, enchere.getNoEnchere());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			System.err.println("Probleme");
+			e.printStackTrace();
 		}
-
 	}
-
-
 
 	@Override
 	public List<Enchere> getByUserId(Integer id) {
@@ -118,8 +112,7 @@ private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
 				Utilisateur user = new Utilisateur();
 				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				ArticleVendu article = new ArticleVendu();	
-//				article.setNoArticle(rs.getInt("no_article"));
-				
+				article.setNoArticle(rs.getInt("no_article"));				
 				Enchere enchere = new Enchere();
 				enchere.setNoEnchere(rs.getInt("no_enchere"));
 				enchere.setDateEnchere(Timestamp.valueOf(rs.getString("date_enchere")).toLocalDateTime());
@@ -131,7 +124,22 @@ private static ArticleVenduDAO daoA = FactoryDAO.getArticleVenduDAO();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return resultat;
+	}
+
+	@Override
+	public boolean checkIfExist(Enchere enchere) {
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(EXIST);
+			stmt.setInt(1, enchere.getArticleVendu().getNoArticle());
+			stmt.setInt(2, enchere.getUtilisateur().getNoUtilisateur());		
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

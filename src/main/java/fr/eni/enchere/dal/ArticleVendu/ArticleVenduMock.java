@@ -21,8 +21,7 @@ public class ArticleVenduMock implements ArticleVenduDAO {
 
 	@Override
 	public void update(ArticleVendu articleVendu) {
-		// TODO Auto-generated method stub
-
+		// inactif
 	}
 
 	@Override
@@ -32,20 +31,31 @@ public class ArticleVenduMock implements ArticleVenduDAO {
 
 	@Override
 	public ArticleVendu getById(Integer integer) {
-		// TODO getByID
+		// inactif
 		return null;
 	}
 
 	@Override
 	public List<ArticleVendu> getByKey(String filtre) {
-		// TODO Auto-generated method stub
+		// inactif
 		return null;
 	}
 
 	@Override
 	public void updatePrice(Integer noArticle, Integer new_montant) {
-		// TODO Auto-generated method stub
-		
+		// inactif
+	}
+
+	@Override
+	public List<ArticleVendu> getAllAchatsByUserId(Integer noUtilisateur) {
+		// inactif
+		return null;
+	}
+
+	@Override
+	public List<ArticleVendu> getAllVentessByUserId(Integer noUtilisateur) {
+		// inactif
+		return null;
 	}
 
 }

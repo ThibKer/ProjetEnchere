@@ -14,5 +14,7 @@ public interface EnchereManager {
 	public List<Enchere> getAllEncheres();
 	public List<Enchere> getEncheresByUtilisateur(Integer noUtilisateur);
 	public boolean valideEnchere(ArticleVendu model, Enchere enchere);
+	public void updateEnchere(Enchere enchere);
+	public boolean checkIfExist(Enchere enchere);
 	
 }

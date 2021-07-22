@@ -28,15 +28,12 @@ import fr.eni.enchere.ihm.model.ModelLogged;
  */
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	private static final long serialVersionUID = 1L;      
 	UtilisateurManager utilisateurManager = UtilisateurManagerSingl.getInstance();
 	CategorieManager categorieManager = CategorieManagerSingl.getInstance();
 	ArticleVenduManager articleVenduManager = ArticleVenduManagerSingl.getInstance();
-	EnchereManager enchereManager = EnchereManagerSingl.getInstance();
-	
+	EnchereManager enchereManager = EnchereManagerSingl.getInstance();	
 	ModelLogged loggedUser = new ModelLogged();
-//	CategorieManager categorieManager = CategorieManagerSingl.getInstance();
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -47,7 +44,7 @@ public class HomeServlet extends HttpServlet {
 
 //    @Override
 //    public void init() throws ServletException {
-//    	this.getServletContext().setAttribute("locale", Locale.FRENCH);
+//    	this.getServletContext().setAttribute("locale", Locale.ENGLISH);
 //    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,8 +52,7 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.getServletContext().setAttribute("categories", categorieManager.getAllCategories());
 		loggedUser = (ModelLogged) request.getSession().getAttribute("User");
-		List<ArticleVendu> displayList = articleVenduManager.getAllArticlesVendus();
-		
+		List<ArticleVendu> displayList = articleVenduManager.getAllArticlesVendus();	
 		String search = request.getParameter("search");
 		String filtre = request.getParameter("filtre");
 		String categorie = request.getParameter("categorie");
@@ -70,9 +66,7 @@ public class HomeServlet extends HttpServlet {
 		String ventesEc = request.getParameter("ventes-ec");
 		String ventesNd = request.getParameter("ventes-nd");
 		String ventesEnd = request.getParameter("ventes-end");
-
-		System.out.println("->>>>>>> " + search);		
-				
+System.out.println("->>>>>>> " + search);						
 		if(search != null) {
 			displayList = articleVenduManager.getAllArticlesVendus();
 			if(filtre != null) {
@@ -86,13 +80,12 @@ public class HomeServlet extends HttpServlet {
 					if(articleVendu.getCategorie().getLibelle().equals(categorie)) {
 						System.out.println("-> la");		
 						cateList.add(articleVendu);	
-					}
-					
+					}	
 				}displayList = cateList;
 			}if(achats != null) {
-				System.out.println(achatsOpen + " -> naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ");
-
+System.out.println(achatsOpen + " -> naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa ");
 				List<ArticleVendu> achatsList = new ArrayList<ArticleVendu>();
+				achatsList = articleVenduManager.getAllAchatsForUserId(loggedUser.getNoUtilisateur());
 				List<Enchere> encheres = enchereManager.getEncheresByUtilisateur(loggedUser.getNoUtilisateur());
 				if(achatsOpen != null) {
 					for (ArticleVendu item : displayList) {
@@ -150,6 +143,7 @@ public class HomeServlet extends HttpServlet {
 			}
 			if(ventes != null) {
 				List<ArticleVendu> ventesList = new ArrayList<ArticleVendu>();
+				ventesList = articleVenduManager.getAllVentesForUserId(loggedUser.getNoUtilisateur());
 				if(ventesEc != null) {
 					for (ArticleVendu item : displayList) {
 						if(item.getDateDebutEncheres().isBefore(LocalDateTime.now()) 

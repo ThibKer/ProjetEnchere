@@ -23,6 +23,7 @@ public class ProfilServlet extends HttpServlet {
 	UtilisateurManager managerUtilisateur = UtilisateurManagerSingl.getInstance();
 	ModelLogged loggedUser;   
 	Utilisateur utilisateur = new Utilisateur(); 
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,45 +35,23 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		loggedUser = (ModelLogged) request.getSession().getAttribute("User");
 		String target = request.getParameter("target");
 		Object logged = request.getSession().getAttribute("User");
-
 		String back = request.getParameter("back");
 		String upload = request.getParameter("upload");
 		String save = request.getParameter("save");
 		String delete = request.getParameter("delete");
-		loggedUser = (ModelLogged) request.getSession().getAttribute("User");
-		System.out.println(back + " ->bakc ?");
-//		System.out.println(upload);
-//		System.out.println(delete);
-//		System.out.println(loggin);
-		System.out.println(target);
-
-//		System.out.println(request.getSession().getAttribute("User")+"p");
-//		System.out.println(request.getParameter("ville"));
-//		System.out.println(request.getParameter("rue"));
-		
 		RequestDispatcher rd = null;
-		
 		if (upload != null) {
-			System.out.println("upp");
 			rd = request.getRequestDispatcher("WEB-INF/user_modification.jsp");
-
 		}
 		if (save != null) {
-			
+			loggedUser = (ModelLogged) request.getSession().getAttribute("User");
 			String current_mdp =  request.getParameter("current_mdp") ;
-			// COM : evite une valeur null pour pouvoir comparer
 			String new_mdp =  request.getParameter("new_mdp") == null ? " " : request.getParameter("mdp2") ;
 			String mdp2 =  request.getParameter("mdp2") ;
-			
-			loggedUser = (ModelLogged) request.getSession().getAttribute("User");
-			
-			
-			
 			if ( loggedUser.getMotDePasse().equals(current_mdp) && new_mdp.equals(mdp2) ) {
-				System.out.println(mdp2);
-				
 				utilisateur.setPseudo( request.getParameter("pseudo") );
 				utilisateur.setNom( request.getParameter("nom") );
 				utilisateur.setPrenom( request.getParameter("prenom") );
@@ -99,51 +78,38 @@ public class ProfilServlet extends HttpServlet {
 				loggedUser.setMotDePasse( utilisateur.getMotDePasse() );		
 	
 				request.getSession().setAttribute("User", loggedUser);
-				System.out.println("update full ?? ");
-				rd = request.getRequestDispatcher("WEB-INF/user_profil.jsp");
+				rd = request.getRequestDispatcher("/HomeServlet");
 			}	
-			// TODO gerer probleme de modification
 			else {
-				System.out.println("probleme de mod de pass non identique");
+				// TODO err de saisi dans le formulaire
 				rd = request.getRequestDispatcher("WEB-INF/user_modification.jsp");
-			}
-			
+			}	
 		}
 		if (delete != null) {
 			//TODO supprimer le compte
 			loggedUser = (ModelLogged) request.getSession().getAttribute("User");
-			
 			managerUtilisateur.deleteUtilisateur( loggedUser.getNoUtilisateur() );
 			rd = request.getRequestDispatcher("/DeconnectionServlet");
-
 		}
 		if ("me".equals(target)) {
-			System.out.println("target");
-			// COM : information pour un affichage Plusieurs fois !
 			utilisateur = managerUtilisateur.getUtilisateurByFields(loggedUser.getPseudo(), loggedUser.getMotDePasse());
 			request.getSession().setAttribute("user", utilisateur);
 			request.setAttribute("full", "yes");
 			rd = request.getRequestDispatcher("WEB-INF/user_profil.jsp");
 		}
 		if (!"me".equals(target) && target != null) {
-			System.out.println("target");
 			utilisateur = managerUtilisateur.getUtilisateurById(Integer.parseInt(target));
-			// COM : information pour un affichage Plusieurs fois !
 			request.getSession().setAttribute("user", utilisateur);
 			request.setAttribute("full", null);
-
 		}
 		if (request.getParameter("user") == null && rd == null) {
 			// TODO recherche du profil correspondant a la target
-			// COM : information pour un affichage unique !
 			request.setAttribute("user", logged);
 			rd = request.getRequestDispatcher("WEB-INF/user_profil.jsp");	
 		}
 		if (back != null) {
-			System.out.println(request.getHeader("referer") + "back !!!???");
 			String referer = request.getHeader("referer");	
-//			response.sendRedirect(referer);
-			response.sendRedirect( request.getHeader("referer") );
+			response.sendRedirect( referer );
 		}
 		else {
 			rd.forward(request, response);	

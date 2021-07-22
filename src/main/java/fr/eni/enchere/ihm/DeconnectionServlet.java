@@ -1,6 +1,7 @@
 package fr.eni.enchere.ihm;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,7 @@ public class DeconnectionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
-		request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+		request.getRequestDispatcher("/HomeServlet").forward(request, response);
 	}
 
 	/**

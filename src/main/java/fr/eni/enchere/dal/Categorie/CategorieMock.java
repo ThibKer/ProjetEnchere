@@ -20,8 +20,7 @@ public class CategorieMock implements CategorieDAO {
 
 	@Override
 	public void update(Categorie categorie) {
-		// TODO Auto-generated method stub
-
+		// inactif
 	}
 
 	@Override
@@ -31,13 +30,13 @@ public class CategorieMock implements CategorieDAO {
 
 	@Override
 	public Categorie getById(Integer integer) {
-		// TODO getById
+		// inactif
 		return null;
 	}
 
 	@Override
 	public Categorie getByLibelle(String categorie) {
-		// TODO Auto-generated method stub
+		// inactif
 		return null;
 	}
 

@@ -27,10 +27,6 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 	public Utilisateur getUtilisateurByFields(String identifiant, String mdp) {
 		Utilisateur utilisateur = new Utilisateur();
 		
-		System.out.println("mana impl");
-
-//			utilisateur = dao.getByEmailPassword(identifiant, mdp);
-		
 		if(identifiant.contains(".")) {
 			utilisateur = dao.getByEmailPassword(identifiant, mdp);
 		}else {
@@ -71,8 +67,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		
 		if(dao.existEmail(request.getParameter("email"))) {
 			return false;
-		}
-		
+		}		
 //			String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 //	        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
 //	        java.util.regex.Matcher m = p.matcher(request.getParameter("email"));
@@ -95,28 +90,32 @@ public class UtilisateurManagerImpl implements UtilisateurManager {
 		return dao.getById(noUtilisateur);
 	}
 
-
-
-
 	@Override
 	public void swapArticleBet(Integer noArticle, Integer old_montant, Integer old_user,
 			Integer new_montant, Integer new_user) {
-		// TODO Auto-generated method stub
 		Utilisateur old = dao.getById(old_user);
 		Utilisateur current = dao.getById(new_user);
 		old.setCredit( old.getCredit() + old_montant );
-		current.setCredit( current.getCredit() - new_montant );
-			
+		current.setCredit( current.getCredit() - new_montant );	
 		dao.update(old);
 		dao.update(current);
 		daoA.updatePrice(noArticle, new_montant);
 	}
 	@Override
 	public void newArticleBet(Integer noArticle,Integer new_montant, Integer new_user) {
-		// TODO Auto-generated method stub
 		Utilisateur current = dao.getById(new_user);
-		current.setCredit( current.getCredit() - new_montant );
-			
+		current.setCredit( current.getCredit() - new_montant );	
 		dao.update(current);
 		daoA.updatePrice(noArticle, new_montant);
+	}
+
+	@Override
+	public void updateArticleBet(Integer noArticle, Integer old_montant, Integer noUtilisateur,
+			Integer new_montant) {
+		Utilisateur user = dao.getById(noUtilisateur);
+		user.setCredit( user.getCredit() + old_montant - new_montant);	
+		user.setNoUtilisateur(noUtilisateur);
+		dao.update(user);
+		daoA.updatePrice(noArticle, new_montant);
+		
 	}}

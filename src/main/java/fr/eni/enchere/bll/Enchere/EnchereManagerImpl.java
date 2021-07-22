@@ -12,9 +12,9 @@ import fr.eni.enchere.dal.Enchere.EnchereDAO;
 import fr.eni.enchere.dal.Utilisateur.UtilisateurDAO;
 
 public class EnchereManagerImpl implements EnchereManager {
-
 	private static EnchereDAO dao =  FactoryDAO.getEnchereDAO();
 	private static UtilisateurDAO daoU =  FactoryDAO.getUtilisateurDAO();
+	
 	@Override
 	public void addEnchere(Enchere enchere) {
 		dao.insert(enchere);
@@ -32,8 +32,6 @@ public class EnchereManagerImpl implements EnchereManager {
 
 	@Override
 	public boolean valideEnchere(ArticleVendu model, Enchere enchere) {
-		// TODO MESSAGE D4ERREUR SI FALSE
-		System.out.println("DANS LA METHODE");
 		if( !model.getEncheres().isEmpty() ) {
 			if(model.getEncheres().get(0).getMontant_Enchere() > enchere.getMontant_Enchere()){
 				return false;
@@ -44,6 +42,16 @@ public class EnchereManagerImpl implements EnchereManager {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void updateEnchere(Enchere enchere) {
+		dao.update(enchere);	
+	}
+
+	@Override
+	public boolean checkIfExist(Enchere enchere) {
+		return dao.checkIfExist(enchere);
 	}
 
 

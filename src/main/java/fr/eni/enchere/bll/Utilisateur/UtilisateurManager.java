@@ -21,5 +21,7 @@ public interface UtilisateurManager {
 	public void swapArticleBet(Integer noArticle, Integer montant_Enchere, Integer noUtilisateur,
 			Integer montant_Enchere2, Integer noUtilisateur2);
 	void newArticleBet(Integer noArticle, Integer new_montant, Integer new_user);
+	public void updateArticleBet(Integer noArticle, Integer montant_Enchere, Integer noUtilisateur,
+			Integer montant_Enchere2);
 	
 }

@@ -1,7 +1,6 @@
 package fr.eni.enchere.ihm;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,12 +37,12 @@ public class EnchereServlet extends HttpServlet {
 	EnchereManager enchereManager = EnchereManagerSingl.getInstance();  
 	ModelLogged loggedUser = new ModelLogged();
 	ArticleVendu model ;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public EnchereServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -54,63 +53,58 @@ public class EnchereServlet extends HttpServlet {
 		String proposition = request.getParameter("proposition");
 		String target = request.getParameter("target");
 		String bet = request.getParameter("bet");
-		System.out.println("USER::" +loggedUser);
 		RequestDispatcher rd = null;
-		System.out.println("target : " +target);
 		if(target != null) {
 			model = articleManager.getArticleById(Integer.parseInt(target));
-			System.out.println("model::" +model);
-
 			request.getSession().setAttribute("vente", model);
 			rd = request.getRequestDispatcher("WEB-INF/detail_enchere.jsp");
 		}
 		if(bet != null) {
-			if(proposition != null && proposition != "") {
-				model = (ArticleVendu) request.getSession().getAttribute("vente");
-				System.out.println("VILIDATE 1? :  yep");
-
-				
+			if(proposition != null && proposition != "" && loggedUser != null) {
+				model = (ArticleVendu) request.getSession().getAttribute("vente");	
 				Utilisateur acheteur = new Utilisateur();
-				acheteur.setNoUtilisateur(loggedUser.getNoUtilisateur());
-				
+				acheteur.setNoUtilisateur(loggedUser.getNoUtilisateur());	
 				Enchere enchere = new Enchere();
 				enchere.setMontant_Enchere(Integer.parseInt(proposition));
 				enchere.setUtilisateur(acheteur);
 				enchere.setArticleVendu(model);
-				
 				if(enchereManager.valideEnchere(model, enchere) == true) {
-					System.out.println("VILIDATE 2 ? :  yep");
-					enchereManager.addEnchere(enchere);
-					if(model.getEncheres().isEmpty()) {
-						utilisateurManager.newArticleBet(
-								model.getNoArticle(), 
+					System.out.println(">> EnchValide");
+					if(!enchereManager.checkIfExist(enchere)) {
+						System.out.println(">> not exist");
+						enchereManager.addEnchere(enchere);
+						if(model.getEncheres().isEmpty()) {
+							utilisateurManager.newArticleBet(
+									model.getNoArticle(), 
+									enchere.getMontant_Enchere(),
+									acheteur.getNoUtilisateur()
+							);
+						}else {
+							utilisateurManager.swapArticleBet(
+								model.getNoArticle(),
+								model.getEncheres().get(0).getMontant_Enchere(),
+								model.getEncheres().get(0).getUtilisateur().getNoUtilisateur(),
+								enchere.getMontant_Enchere(),
+								acheteur.getNoUtilisateur()
+							);
+						}
+					}else{
+						utilisateurManager.updateArticleBet(
+								model.getNoArticle(),
+								model.getEncheres().get(0).getMontant_Enchere(),
 								enchere.getMontant_Enchere(),
 								acheteur.getNoUtilisateur()
 						);
-					}else {
-						utilisateurManager.swapArticleBet(
-							model.getNoArticle(),
-							model.getEncheres().get(0).getMontant_Enchere(),
-							model.getEncheres().get(0).getUtilisateur().getNoUtilisateur(),
-							enchere.getMontant_Enchere(),
-							acheteur.getNoUtilisateur()
-						);
-					}
-					
+						enchereManager.updateEnchere(enchere);
+					}		
 				}
-				
 				model = articleManager.getArticleById(Integer.parseInt(target));
 				request.getSession().setAttribute("vente", model);
 				rd = request.getRequestDispatcher("HomeServlet");
 			}else {
 				//TODO error montant non renseignée
-//				rd = request.getRequestDispatcher("EnchereServlet?target=" + model.getNoArticle().toString());
-			}
-			
-			
-//			model.setPrixVente(Integer.parseInt(proposition));
-//			model.addEnchere(enchere);
-			
+				rd = request.getRequestDispatcher("HomeServlet");
+			}	
 		}
 		rd.forward(request, response);
 	}
@@ -119,7 +113,6 @@ public class EnchereServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

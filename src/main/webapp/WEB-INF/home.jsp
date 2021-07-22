@@ -136,8 +136,8 @@
 	
 	<section>
 		<c:forEach var="vente" items="${liste}">
-		 <a href="EnchereServlet?target=${vente.noArticle}" style="text-decoration:none;">
-			<div class="card">
+<%-- 		 <a href="EnchereServlet?target=${vente.noArticle}" style="text-decoration:none;">
+ --%>			<div class="card" onclick="openCard(${vente.noArticle})">
 				<div>
 					<img alt="" src="">
 				</div>
@@ -171,7 +171,7 @@
 					 </div>
 				</div>
 			</div>
-			</a>
+			<!-- </a> -->
 		</c:forEach>
 	</section>
 
@@ -212,7 +212,9 @@ function hidden(which,disabledClass,unabledClass){
 		}
 	}
 }
-
+function openCard(target) {
+	  window.location.replace("EnchereServlet?target="+target)
+}
 </script>
 	
 	
