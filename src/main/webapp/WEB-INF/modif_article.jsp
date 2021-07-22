@@ -22,7 +22,12 @@
 	   <fmt:message key="st_vente_modifier" bundle="${r}"></fmt:message>
 	</label>
 
-	<form action="HomeServlet" method="POST" enctype="multipart/form-data" class="f-create-article">
+	<form action="HomeServlet" method="POST" enctype="multipart/form-data" class="f-new-article">
+	
+	<div class="na-gauche">
+	
+	</div>
+	<div class="na-droite">
 	  <div>
 	    <label for="article">
 	    	<fmt:message key="l_article" bundle="${r}"></fmt:message>
@@ -76,7 +81,7 @@
 	    </label>
 	    <input type="date" name="end" id="end" value="${vente.fin}">
 	  </div>
-	  
+	  <div class="cadre-retrait">
 	  <div id="vente-retrait">
 	  	<label for="retrait">
 		    <fmt:message key="l_retrait" bundle="${r}"></fmt:message>
@@ -101,8 +106,10 @@
 		    <input type="text" name="ville" id="ville" value="${user.ville}">
 	    </div>
 	  </div>
+	  </div>
+	  </div>
 	  
-
+	<div class="na-bouton">
 	  <div>
 	  	<fmt:message key="btn_enregistrer" bundle="${r}" var="enregistrer"/>	    
 		<input type="submit" name="save" value="${enregistrer}">
@@ -114,6 +121,7 @@
 	  <div>
 	    <fmt:message key="btn_retirer_vente" bundle="${r}" var="retirer"/>   
 		<input type="submit" name="delete" value="${retirer}">
+	  </div>
 	  </div>
 	  
 	</form>

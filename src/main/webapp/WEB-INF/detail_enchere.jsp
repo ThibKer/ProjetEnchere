@@ -15,13 +15,17 @@
 <title>
 	<fmt:message key="t_detail_vente" bundle="${r}"></fmt:message>
 </title>
+<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
-	<label for="st">
+	<label for="st" class="de-st">
 	   <fmt:message key="st_detail_vente" bundle="${r}"></fmt:message>
 	</label>
 
 	<form action="HomeServlet" method="POST" class="f-propo-vente">
+	  <div class="de-gauche">
+	  </div>
+	  <div class="de-droite">
 	  <div>
 	    <label for="article">
 	    	<i>${vente.article}</i>
@@ -79,11 +83,11 @@
 	   	<input type="number" name="proposition" id="proposition" min="${vente.offre}">
 	  </div>
 	  
-	  <div>
+	  <div class="mp-bouton">
 	    <fmt:message key="btn_encherir" bundle="${r}" var="encherir"/>   
 		<input type="submit" name="bet" value="${encherir}">
 	  </div>
-	  
+	  </div>
 	</form>
 	
 </body>

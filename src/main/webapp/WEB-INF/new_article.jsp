@@ -80,6 +80,7 @@
 	    <input type="date" name="end" id="end">
 	  </div>
 	  
+	  <div class="cadre-retrait">
 	  <div id="vente-retrait">
 	  	<label for="retrait">
 		    <fmt:message key="l_retrait" bundle="${r}"></fmt:message>
@@ -104,8 +105,9 @@
 		    <input type="text" name="ville" id="ville" value="${User.ville}">
 	    </div>
 	  </div>
+	  </div>
 	  
-
+ 	<div class="na-bouton">
 	  <div>
 	  	<fmt:message key="btn_enregistrer" bundle="${r}" var="enregistrer"/>	    
 		<input type="submit" name="save" value="${enregistrer}">
@@ -117,6 +119,7 @@
 		</a> 
 	  </div>
 	  
+	</div>
 	</div>
 	 
 	  
