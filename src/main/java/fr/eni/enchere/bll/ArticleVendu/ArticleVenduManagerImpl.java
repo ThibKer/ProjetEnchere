@@ -67,4 +67,9 @@ public class ArticleVenduManagerImpl implements ArticleVenduManager {
 	public List<ArticleVendu> findByKey(String filtre) {
 		return dao.getByKey(filtre);
 	}
+
+	@Override
+	public ArticleVendu getArticleById(Integer articleId) {
+		return dao.getById(articleId);
+	}
 }

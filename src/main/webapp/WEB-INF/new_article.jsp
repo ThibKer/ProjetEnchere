@@ -117,23 +117,56 @@
 	</form>
 	
 	<script type="text/javascript">
-	 	var today = new Date();
+		var today = new Date();
 	 	var dd = today.getDate();
 		var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
 		var yyyy = today.getFullYear(); 
+		
 		if(dd<10){
-		  dd='0'+dd
+			dd='0'+dd
 		} 
 		if(mm<10){
-		  mm='0'+mm
+			mm='0'+mm
 		} 
 		today = yyyy+'-'+mm+'-'+dd;
 		document.getElementById("start").setAttribute("min", today);
-	 	document.getElementById("end").setAttribute("min", document.getElementById("start").getAttribute("min"));  	
+			
+			
+		var today = new Date()
+		var tomorrow = new Date(today)
+		tomorrow.setDate(tomorrow.getDate() + 1)
+
+		var ddt = tomorrow.getDate();
+		var mmt = tomorrow.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+		var yyyyt = tomorrow.getFullYear(); 
+		
+		if(ddt<10){
+		  ddt='0'+ddt
+		} 
+		if(mmt<10){
+		  mmt='0'+mmt
+		} 
+		tomorrow = yyyyt+'-'+mmt+'-'+ddt;
+	 	document.getElementById("end").setAttribute("min", tomorrow);  	
 	 	
 	 	function dateAdjust(){
 	 	 	document.getElementById("end").value= '' ;
-	 	 	document.getElementById("end").setAttribute("min", document.getElementById("start").value); 
+	 	 	
+	 	 	var tod = new Date()
+			var tom = new Date(tod)
+			tom.setDate(tom.getDate() + 1)
+
+			var dt = tom.getDate();
+			var mt = tom.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+			var yyt = tom.getFullYear(); 
+			if(dt<10){
+				  dt='0'+dt
+				} 
+				if(mt<10){
+				  mt='0'+mt
+				} 
+				tom = yyt+'-'+mt+'-'+dt;
+	 	 	document.getElementById("end").setAttribute("min", tom); 
 	 	}
 	</script>
 	

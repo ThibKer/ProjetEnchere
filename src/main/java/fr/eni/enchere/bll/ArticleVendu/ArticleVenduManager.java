@@ -12,5 +12,6 @@ public interface ArticleVenduManager {
 	public List<ArticleVendu>getAllArticlesVendus();
 	public boolean checkIfValid(HttpServletRequest request);
 	public List<ArticleVendu> findByKey(String filtre);
+	public ArticleVendu getArticleById(Integer articleId);
 	
 }

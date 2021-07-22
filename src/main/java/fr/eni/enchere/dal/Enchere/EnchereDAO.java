@@ -11,5 +11,6 @@ public interface EnchereDAO extends DAO<Enchere> {
 	public List<Enchere>getAll();
 	public void update(Enchere enchere);
 	public void delete(Enchere enchere);
+	public List<Enchere> getByUserId(Integer userId);
 
 }

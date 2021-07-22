@@ -89,8 +89,8 @@ public String toString() {
 	builder.append(noEnchere);
 	builder.append(", utilisateur=");
 	builder.append(utilisateur);
-	builder.append(", ArticleVendu=");
-	builder.append(ArticleVendu);
+//	builder.append(", ArticleVendu=");
+//	builder.append(ArticleVendu);
 	builder.append("]");
 	return builder.toString();
 }

@@ -14,6 +14,7 @@ import java.util.List;
 
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
+import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.ConnectionProvider;
 import fr.eni.enchere.dal.FactoryDAO;
@@ -30,13 +31,16 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	public String table = "ARTICLES_VENDUS";
 	public String t_cate = "CATEGORIES";
 	public String t_user = "UTILISATEURS";
+	public String t_ench = "ENCHERES";
+	
 	private String INSERT = "INSERT INTO " + table + "(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?)";
 //	private String SELECT = "SELECT * FROM " + table;
 	private String SELECT = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente" 
 			+ ",A.no_utilisateur,U.administrateur,U.pseudo,U.prenom,U.nom,U.email,U.credit,U.code_postal,U.rue,U.ville,U.telephone,A.no_categorie,C.libelle"
 		    + " FROM " + table + " as A JOIN " + t_cate + " as C ON C.no_categorie = A.no_categorie JOIN "+ t_user + " as U ON U.no_utilisateur = A.no_utilisateur;";
 			
-	private String SELECT_BY_KEY = "SELECT * FROM " + table + " WHERE ((nom_article LIKE ?) OR (description LIKE ?))";
+//	private String SELECT_BY_KEY = "SELECT * FROM " + table + " WHERE ((nom_article LIKE ?) OR (description LIKE ?))";
+	private String UPDATE_PRICE = "UPDATE " + table + " SET prix_vente=? WHERE no_article=?"; 
 	// private String UPDATE = "UPDATE " + table
 	// + " SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?,
 	// code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE administrateur=? ";
@@ -95,8 +99,19 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 				article.setNoArticle(rs.getInt("no_article"));
 				article.setNomArticle(rs.getString("nom_article"));
 				article.setDescription(rs.getString("description"));
-				article.setDateDebutEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_debut_encheres")), LocalTime.now()));
-				article.setDateFinEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_fin_encheres")), LocalTime.now()));
+				article.setDateDebutEncheres(Timestamp.valueOf(rs.getString("date_debut_encheres")).toLocalDateTime());
+				article.setDateFinEncheres(Timestamp.valueOf(rs.getString("date_fin_encheres")).toLocalDateTime());
+//				article.setDateDebutEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_debut_encheres")), LocalTime.now()));
+//				article.setDateFinEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_fin_encheres")), LocalTime.now()));
+				if(article.getDateDebutEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("ND");
+				}
+				if(article.getDateFinEncheres().isBefore(LocalDateTime.now())) {
+					article.setEtatVente("CLOSE");
+				}
+				if(article.getDateDebutEncheres().isBefore(LocalDateTime.now()) && article.getDateFinEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("EC");
+				}
 				article.setMiseAPrix(rs.getInt("prix_initial"));
 				article.setPrixVente(rs.getInt("prix_vente"));			
 				article.setUtilisateur(user);
@@ -129,8 +144,95 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 
 	@Override
 	public ArticleVendu getById(Integer integer) {
-		// TODO getById
-		return null;
+//		ArticleVendu res = new ArticleVendu();
+		Utilisateur vendeur = new Utilisateur();
+		Utilisateur acheteur = new Utilisateur();
+		Categorie categorie = new Categorie();	
+		ArticleVendu article = new ArticleVendu();
+		Enchere enchere = new Enchere();
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement("SELECT A.no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente" 
+					+ ",A.no_utilisateur,U.administrateur,U.pseudo,U.prenom,U.nom,U.email,U.credit,U.code_postal,U.rue,U.ville,U.telephone,A.no_categorie,C.libelle"
+					+ ",E.no_utilisateur as ench_no_utilisateur ,Ubis.pseudo as ench_pseudo ,no_enchere, date_enchere, montant_enchere"
+				    + " FROM " + table + " as A FULL OUTER JOIN " + t_cate + " as C ON C.no_categorie = A.no_categorie FULL OUTER JOIN "+ t_user + " as U ON U.no_utilisateur = A.no_utilisateur"
+				    + " FULL OUTER JOIN " + t_ench + " as E ON E.no_article = A.no_article FULL OUTER JOIN " + t_user + " as Ubis ON E.no_utilisateur = Ubis.no_utilisateur"
+				    + " WHERE A.no_article=? ORDER BY montant_enchere ASC"
+			);
+			stmt.setInt(1, integer);
+			ResultSet rs = stmt.executeQuery();
+			System.out.println("RES FOUND");
+			if(rs.next()) {
+				System.out.println("RES FOUND");
+				
+				vendeur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				vendeur.setPseudo(rs.getString("pseudo"));
+				vendeur.setNom(rs.getString("nom"));
+				vendeur.setPrenom(rs.getString("prenom"));
+				vendeur.setEmail(rs.getString("email"));
+				vendeur.setCredit(rs.getInt("credit"));
+				vendeur.setTelephone(rs.getString("telephone"));
+				vendeur.setRue(rs.getString("rue"));
+				vendeur.setCodePostal(rs.getString("code_postal"));
+				vendeur.setVille(rs.getString("ville"));
+				vendeur.setAdministrateur(rs.getString("administrateur"));
+				
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+				
+				  
+				
+//				enchere.setArticleVendu(article);
+				
+				article.setNoArticle(rs.getInt("no_article"));
+				article.setNomArticle(rs.getString("nom_article"));
+				article.setDescription(rs.getString("description"));
+				article.setDateDebutEncheres(Timestamp.valueOf(rs.getString("date_debut_encheres")).toLocalDateTime());
+				article.setDateFinEncheres(Timestamp.valueOf(rs.getString("date_fin_encheres")).toLocalDateTime());
+//				article.setDateDebutEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_debut_encheres")), LocalTime.now()));
+//				article.setDateFinEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_fin_encheres")), LocalTime.now()));
+				if(article.getDateDebutEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("ND");
+				}
+				if(article.getDateFinEncheres().isBefore(LocalDateTime.now())) {
+					article.setEtatVente("CLOSE");
+				}
+				if(article.getDateDebutEncheres().isBefore(LocalDateTime.now()) && article.getDateFinEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("EC");
+				}
+				article.setMiseAPrix(rs.getInt("prix_initial"));
+				article.setPrixVente(rs.getInt("prix_vente"));			
+				article.setUtilisateur(vendeur);
+				article.setCategorie(categorie);	
+				Integer isBet = (Integer) rs.getInt("ench_no_utilisateur");
+				System.out.println("==W isBet W== "+isBet);
+				if (rs.getInt("ench_no_utilisateur") != 0) {
+					acheteur.setNoUtilisateur(rs.getInt("ench_no_utilisateur"));// works for Java 1.5+
+					acheteur.setNoUtilisateur(rs.getInt("ench_no_utilisateur"));
+					acheteur.setPseudo(rs.getString("ench_pseudo"));
+					
+					enchere.setNoEnchere(rs.getInt("no_enchere"));
+					enchere.setDateEnchere(Timestamp.valueOf(rs.getString("date_enchere")).toLocalDateTime());
+					enchere.setMontant_Enchere(rs.getInt("montant_enchere"));
+					enchere.setUtilisateur(acheteur);
+					article.addEnchere(enchere);
+				}
+
+			}
+			while (rs.next()) {
+				Integer isBet = (Integer) rs.getInt("ench_no_utilisateur");
+				System.out.println("==W isBet W== "+isBet);
+				if (rs.getInt("ench_no_utilisateur") != 0) {
+					enchere.setNoEnchere(rs.getInt("no_enchere"));
+					enchere.setDateEnchere(Timestamp.valueOf(rs.getString("date_enchere")).toLocalDateTime());
+					enchere.setMontant_Enchere(rs.getInt("montant_enchere"));
+					enchere.setUtilisateur(acheteur);
+					article.addEnchere(enchere);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return article;
 	}
 
 	@Override
@@ -145,6 +247,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 				    + " WHERE ((nom_article LIKE "+query+") OR (description LIKE "+query+"))"
 			);
 			ResultSet rs = stmt.executeQuery();
+			
 			while (rs.next()) {
 				System.out.println("RES FOUND");
 				Utilisateur user = new Utilisateur();
@@ -166,8 +269,19 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 				article.setNoArticle(rs.getInt("no_article"));
 				article.setNomArticle(rs.getString("nom_article"));
 				article.setDescription(rs.getString("description"));
-				article.setDateDebutEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_debut_encheres")), LocalTime.now()));
-				article.setDateFinEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_fin_encheres")), LocalTime.now()));
+				article.setDateDebutEncheres(Timestamp.valueOf(rs.getString("date_debut_encheres")).toLocalDateTime());
+				article.setDateFinEncheres(Timestamp.valueOf(rs.getString("date_fin_encheres")).toLocalDateTime());
+//				article.setDateDebutEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_debut_encheres")), LocalTime.now()));
+//				article.setDateFinEncheres(LocalDateTime.of(LocalDate.parse(rs.getString("date_fin_encheres")), LocalTime.now()));
+				if(article.getDateDebutEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("ND");
+				}
+				if(article.getDateFinEncheres().isBefore(LocalDateTime.now())) {
+					article.setEtatVente("CLOSE");
+				}
+				if(article.getDateDebutEncheres().isBefore(LocalDateTime.now()) && article.getDateFinEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("EC");
+				}
 				article.setMiseAPrix(rs.getInt("prix_initial"));
 				article.setPrixVente(rs.getInt("prix_vente"));			
 				article.setUtilisateur(user);
@@ -178,5 +292,21 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 			e.printStackTrace();
 		}
 		return resultat;
+	}
+
+	@Override
+	public void updatePrice(Integer noArticle, Integer new_montant) {
+		
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(UPDATE_PRICE);
+			stmt.setInt(1, new_montant);
+			stmt.setInt(2, noArticle);
+			
+			stmt.executeUpdate();	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

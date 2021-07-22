@@ -26,7 +26,7 @@
 			</a>
 		</c:if>	
 		<c:if test="${!empty User}">
-			<a href="/encheres">
+			<a href="NewEnchere">
 				<fmt:message key="nav_encheres" bundle="${r}"></fmt:message>
 			</a>
 			<a href="NewArticleServlet">
@@ -48,6 +48,7 @@
 	</label>
 
 	<form action="HomeServlet" method="POST" class="f-create-article">
+	<div class="f-container">
 	  <div class = "h-filtre">
 	    <label for="filtre">
 	    	<fmt:message key="l_filtre" bundle="${r}"></fmt:message>
@@ -69,6 +70,7 @@
 		</select>
 	  </div>
 	  
+	  <div class="f-container34">
 	  <c:if test="${!empty User}">
 		  <div class = "bloc-radio-checkbox">
 		  	<input class="radio bloc-radio-i" onClick="radioEvent(this,'radio','groupventes','groupachats')" type="radio" name="achats" id="achats">
@@ -77,19 +79,19 @@
 		    </label>
 		    <div>
 		    	<div class="bloc-checkbox">
-			    	<input class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-open" id="achats-open">
+			    	<input disabled class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-open" id="achats-open">
 				    <label for="achats-open">
 				    	<fmt:message key="cb_achats_open" bundle="${r}"></fmt:message>
 				    </label>
 		    	</div>
 		    	<div class="bloc-checkbox">
-			    	<input class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-my" id="achats-my">
+			    	<input disabled class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-my" id="achats-my">
 				    <label for="achats-my">
 				    	<fmt:message key="cb_achats_my" bundle="${r}"></fmt:message>
 				    </label>
 		    	</div>
 		    	<div class="bloc-checkbox">
-			    	<input class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-win" id="achats-win">
+			    	<input disabled class="groupachats" onClick="toggle(this,'groupachats')" type="checkbox" name="achats-win" id="achats-win">
 				    <label for="achats-win">
 				    	<fmt:message key="cb_achats_win" bundle="${r}"></fmt:message>
 				    </label>
@@ -104,19 +106,19 @@
 		    </label>
 		    <div>
 		    	<div class="bloc-checkbox">
-			    	<input class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-ec" id="ventes-ec">
+			    	<input disabled class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-ec" id="ventes-ec">
 				    <label for="ventes-ec">
 				    	<fmt:message key="cb_ventes_ec" bundle="${r}"></fmt:message>
 				    </label>
 		    	</div>
 		    	<div class="bloc-checkbox">
-			    	<input class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-nd" id="ventes-nd">
+			    	<input disabled class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-nd" id="ventes-nd">
 				    <label for="ventes-nd">
 				    	<fmt:message key="cb_ventes_nd" bundle="${r}"></fmt:message>
 				    </label>
 		    	</div >
 		    	<div class="bloc-checkbox">
-			    	<input class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-end" id="ventes-end">
+			    	<input disabled class="groupventes" onClick="toggle(this,'groupventes')" type="checkbox" name="ventes-end" id="ventes-end">
 				    <label for="ventes-end">
 				    	<fmt:message key="cb_ventes_end" bundle="${r}"></fmt:message>
 				    </label>
@@ -124,18 +126,17 @@
 		    </div>
 		  </div>
 		</c:if>
+		</div>
+	</div>
 	  <div class = "bouton">
 	    <fmt:message key="btn_rechercher" bundle="${r}" var="rechercher"/>   
 		<input type="submit" name="search" value="${rechercher}">
-	  </div>  
-	  <div class = "bouton">
-		<input type="submit" name="test" value="test">
 	  </div>  
 	</form>
 	
 	<section>
 		<c:forEach var="vente" items="${liste}">
-		 <a href="your-link-bio" style="text-decoration:none;">
+		 <a href="EnchereServlet?target=${vente.noArticle}" style="text-decoration:none;">
 			<div class="card">
 				<div>
 					<img alt="" src="">
@@ -161,8 +162,6 @@
 						<fmt:formatDate value="${myParseDate}"  pattern="dd MMM yyyy"></fmt:formatDate > 
 						<fmt:message key="sep_prix" bundle="${r}"></fmt:message>
 						<fmt:formatDate value="${myParseDate}"  pattern="HH:mm"></fmt:formatDate >
-					   <%--  <i><fmt:formatDate type = "both" dateStyle = "long" timeStyle = "long" value = "${vente.dateFinEncheres}" /></i>
-     					<i><fmt:formatDate pattern = "yyyy-MM-dd" value = "${vente.dateFinEncheres}" /></i> --%>
    					 </div>
 					 <div>
 					  	<label for="vendeur">
@@ -178,6 +177,14 @@
 
 <script type="text/javascript">
 
+var groupachats=document.getElementsByClassName(groupachats);	
+for(var i=0;i<groupachats.length;i++){
+	groupachats[i].disabled=true;
+}
+var groupeventes=document.getElementsByClassName(groupachats);
+for(var i=0;i<groupeventes.length;i++){
+	groupeventes[i].disabled=true;
+}
 function radioEvent(which,radioClass,checkboxClass,checkboxClass2){
 	toggle(which,radioClass);
 	hidden(which,checkboxClass,checkboxClass2);

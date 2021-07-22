@@ -41,12 +41,12 @@ public class ProfilServlet extends HttpServlet {
 		String upload = request.getParameter("upload");
 		String save = request.getParameter("save");
 		String delete = request.getParameter("delete");
-
+		loggedUser = (ModelLogged) request.getSession().getAttribute("User");
 		System.out.println(back + " ->bakc ?");
 //		System.out.println(upload);
 //		System.out.println(delete);
 //		System.out.println(loggin);
-//		System.out.println(target);
+		System.out.println(target);
 
 //		System.out.println(request.getSession().getAttribute("User")+"p");
 //		System.out.println(request.getParameter("ville"));
@@ -100,7 +100,7 @@ public class ProfilServlet extends HttpServlet {
 	
 				request.getSession().setAttribute("User", loggedUser);
 				System.out.println("update full ?? ");
-				rd = request.getRequestDispatcher("WEB-INF/user_myprofil.jsp");
+				rd = request.getRequestDispatcher("WEB-INF/user_profil.jsp");
 			}	
 			// TODO gerer probleme de modification
 			else {
@@ -120,21 +120,24 @@ public class ProfilServlet extends HttpServlet {
 		if ("me".equals(target)) {
 			System.out.println("target");
 			// COM : information pour un affichage Plusieurs fois !
-			request.getSession().setAttribute("user", logged);
-			rd = request.getRequestDispatcher("WEB-INF/user_myprofil.jsp");
+			utilisateur = managerUtilisateur.getUtilisateurByFields(loggedUser.getPseudo(), loggedUser.getMotDePasse());
+			request.getSession().setAttribute("user", utilisateur);
+			request.setAttribute("full", "yes");
+			rd = request.getRequestDispatcher("WEB-INF/user_profil.jsp");
 		}
 		if (!"me".equals(target) && target != null) {
 			System.out.println("target");
 			utilisateur = managerUtilisateur.getUtilisateurById(Integer.parseInt(target));
 			// COM : information pour un affichage Plusieurs fois !
 			request.getSession().setAttribute("user", utilisateur);
-			rd = request.getRequestDispatcher("WEB-INF/user_myprofil.jsp");
+			request.setAttribute("full", null);
+
 		}
-		if ( request.getParameter("user") == null && rd == null) {
+		if (request.getParameter("user") == null && rd == null) {
 			// TODO recherche du profil correspondant a la target
 			// COM : information pour un affichage unique !
 			request.setAttribute("user", logged);
-			rd = request.getRequestDispatcher("WEB-INF/user_myprofil.jsp");	
+			rd = request.getRequestDispatcher("WEB-INF/user_profil.jsp");	
 		}
 		if (back != null) {
 			System.out.println(request.getHeader("referer") + "back !!!???");

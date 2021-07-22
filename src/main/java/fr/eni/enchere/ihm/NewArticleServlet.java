@@ -57,7 +57,8 @@ public class NewArticleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.getServletContext().setAttribute("categories", categorieManager.getAllCategories());
 		loggedUser = (ModelLogged) request.getSession().getAttribute("User");
-		RequestDispatcher rd = null;
+//		RequestDispatcher rd = null;
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/new_article.jsp");;
 		ArticleVendu articleVendu = new ArticleVendu();
 		Retrait retrait = new Retrait();
 		
@@ -85,7 +86,6 @@ public class NewArticleServlet extends HttpServlet {
 //		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		LocalDateTime date = LocalDateTime.parse("2005-02-12", formatter);
 //		System.out.println(date);
-
 		if(cancel != null) {
 			response.sendRedirect(request.getHeader("Referer"));
 		}
@@ -122,10 +122,12 @@ public class NewArticleServlet extends HttpServlet {
 				
 				System.out.println(retrait);
 				System.out.println("ALL RECCORD");
-			}
-			rd = request.getRequestDispatcher("WEB-INF/new_article.jsp");	
+				
+				
+				rd = request.getRequestDispatcher("HomeServlet");	
+			}	
 		}
-		rd = request.getRequestDispatcher("WEB-INF/new_article.jsp");	
+		//
 		
 		rd.forward(request, response);
 	}

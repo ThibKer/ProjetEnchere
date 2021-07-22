@@ -42,4 +42,10 @@ public class ArticleVenduMock implements ArticleVenduDAO {
 		return null;
 	}
 
+	@Override
+	public void updatePrice(Integer noArticle, Integer new_montant) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

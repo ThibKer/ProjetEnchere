@@ -1,17 +1,20 @@
 package fr.eni.enchere.bll.Enchere;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Enchere;
+import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.FactoryDAO;
 import fr.eni.enchere.dal.Enchere.EnchereDAO;
+import fr.eni.enchere.dal.Utilisateur.UtilisateurDAO;
 
 public class EnchereManagerImpl implements EnchereManager {
 
 	private static EnchereDAO dao =  FactoryDAO.getEnchereDAO();
+	private static UtilisateurDAO daoU =  FactoryDAO.getUtilisateurDAO();
 	@Override
 	public void addEnchere(Enchere enchere) {
 		dao.insert(enchere);
@@ -20,6 +23,27 @@ public class EnchereManagerImpl implements EnchereManager {
 	@Override
 	public List<Enchere> getAllEncheres() {
 		return dao.getAll();
+	}
+
+	@Override
+	public List<Enchere> getEncheresByUtilisateur(Integer noUtilisateur) {
+		return dao.getByUserId(noUtilisateur);
+	}
+
+	@Override
+	public boolean valideEnchere(ArticleVendu model, Enchere enchere) {
+		// TODO MESSAGE D4ERREUR SI FALSE
+		System.out.println("DANS LA METHODE");
+		if( !model.getEncheres().isEmpty() ) {
+			if(model.getEncheres().get(0).getMontant_Enchere() > enchere.getMontant_Enchere()){
+				return false;
+			}
+		}
+		Utilisateur user = daoU.getById(enchere.getUtilisateur().getNoUtilisateur());
+		if(user.getCredit() < enchere.getMontant_Enchere()) {
+			return false;
+		}
+		return true;
 	}
 
 

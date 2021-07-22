@@ -13,5 +13,6 @@ public interface ArticleVenduDAO extends DAO<ArticleVendu> {
 	public void delete(ArticleVendu articleVendu);
 	public ArticleVendu getById(Integer integer);
 	public List<ArticleVendu> getByKey(String filtre);
+	public void updatePrice(Integer noArticle, Integer new_montant);
 
 }

@@ -69,13 +69,27 @@ public class NewUserServlet extends HttpServlet {
 				utilisateur.setCredit(100);
 				
 //						System.out.println("user : "+utilisateur);
+//				try {
+//					managerUtilisateur.addUtilisateur( utilisateur );
+//
+//				}finally {
+//					request.getRequestDispatcher("LoginServlet?"
+//							+"identifiant="+utilisateur.getPseudo()
+//							+",mdp="+utilisateur.getMotDePasse()
+//							).forward(request, response);
+//				}
 				managerUtilisateur.addUtilisateur( utilisateur );
+
+				
 				loggedUser = new ModelLogged( managerUtilisateur.getUtilisateurByFields(pseudo, mdp) );
-//				loggedUser = new ModelLogged(managerUtilisateur.createUtilisateur( utilisateur ));
-//						System.out.println("Logged : "+loggedUser);	
+				loggedUser = new ModelLogged(managerUtilisateur.createUtilisateur( utilisateur ));
+						System.out.println("Logged : "+loggedUser);	
 						
 				request.getSession().setAttribute("User", loggedUser);
 				request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
+			}
+			else {
+				request.getRequestDispatcher("WEB-INF/user_creation.jsp").forward(request, response);
 			}
 			
 			

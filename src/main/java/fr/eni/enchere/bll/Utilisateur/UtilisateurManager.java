@@ -18,5 +18,8 @@ public interface UtilisateurManager {
 	public void updateUtilisateur(Utilisateur utilisateur);
 	public void deleteUtilisateur(Integer noUtilisateur);
 	public Utilisateur getUtilisateurById(Integer noUtilisateur);
+	public void swapArticleBet(Integer noArticle, Integer montant_Enchere, Integer noUtilisateur,
+			Integer montant_Enchere2, Integer noUtilisateur2);
+	void newArticleBet(Integer noArticle, Integer new_montant, Integer new_user);
 	
 }

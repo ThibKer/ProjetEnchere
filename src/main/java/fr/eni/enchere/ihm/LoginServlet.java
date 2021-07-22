@@ -56,6 +56,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		if(identifiant != null && mdp != null) {
 			Utilisateur userTest = managerUtilisateur.getUtilisateurByFields(identifiant, mdp);
+			System.out.println("user test rempli ?? :" +userTest);
 			if(userTest.getPseudo() != null) {
 				System.out.println("iciiiiiiiiii");
 				loggedUser.setNoUtilisateur( userTest.getNoUtilisateur() );

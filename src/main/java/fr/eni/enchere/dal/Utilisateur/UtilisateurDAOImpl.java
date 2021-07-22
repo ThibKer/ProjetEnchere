@@ -21,6 +21,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private String SELECT_EMAIL_MDP = "SELECT * FROM " + table + " WHERE email=? AND mot_de_passe=?";
 	private String SELECT_PSEUDO_MDP = "SELECT * FROM " + table + " WHERE pseudo=? AND mot_de_passe=?";
 	private String SELECT_PSEUDO = "SELECT * FROM " + table + " WHERE pseudo=?";
+	private String SELECT_EMAIL = "SELECT * FROM " + table + " WHERE email=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -208,10 +209,25 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	public boolean existPseudo(String pseudo) {
 		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement stmt = connection.prepareStatement(SELECT_PSEUDO);
-			stmt.setString(1, pseudo);;
+			stmt.setString(1, pseudo);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {	
 //				System.out.println(rs.next());
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean existEmail(String email) {
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement(SELECT_EMAIL);
+			stmt.setString(1, email);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {	
 				return true;
 			}
 		} catch (SQLException e) {

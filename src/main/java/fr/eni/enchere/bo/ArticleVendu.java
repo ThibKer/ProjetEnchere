@@ -30,7 +30,7 @@ public class ArticleVendu {
 	private Utilisateur utilisateur;
 	private Categorie categorie;
 	private Retrait retrait;
-	private List<Enchere> Encheres = new ArrayList<>();
+	private List<Enchere> encheres = new ArrayList<>();
 
 	public ArticleVendu() {
 		super();
@@ -50,7 +50,7 @@ public class ArticleVendu {
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 		this.retrait = retrait;
-		Encheres = encheres;
+		this.encheres = encheres;
 	}
 
 	public ArticleVendu(Integer noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
@@ -68,7 +68,7 @@ public class ArticleVendu {
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
 		this.retrait = retrait;
-		Encheres = encheres;
+		this.encheres = encheres;
 	}
 
 	public Integer getNoArticle() {
@@ -160,11 +160,11 @@ public class ArticleVendu {
 	}
 
 	public List<Enchere> getEncheres() {
-		return Encheres;
+		return encheres;
 	}
 
 	public void setEncheres(List<Enchere> encheres) {
-		Encheres = encheres;
+		this.encheres = encheres;
 	}
 
 	@Override
@@ -193,9 +193,13 @@ public class ArticleVendu {
 		builder.append(", retrait=");
 		builder.append(retrait);
 		builder.append(", Encheres=");
-		builder.append(Encheres);
+		builder.append(encheres);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public void addEnchere(Enchere enchere) {
+		this.encheres.add(enchere);
 	}
 
 }

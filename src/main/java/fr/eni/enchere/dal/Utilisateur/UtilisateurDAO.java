@@ -17,5 +17,6 @@ public interface UtilisateurDAO extends DAO<Utilisateur> {
 	public Utilisateur getByPseudoPassword(String identifiant, String mdp);
 	
 	public boolean existPseudo(String pseudo);
+	public boolean existEmail(String parameter);
 
 }

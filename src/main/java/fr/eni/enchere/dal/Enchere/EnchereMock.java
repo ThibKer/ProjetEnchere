@@ -30,4 +30,12 @@ public class EnchereMock implements EnchereDAO {
 		
 	}
 
+	@Override
+	public List<Enchere> getByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 }

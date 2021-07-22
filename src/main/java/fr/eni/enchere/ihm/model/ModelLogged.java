@@ -17,6 +17,7 @@ public class ModelLogged {
 	private String administrateur;
 	
 	public ModelLogged() {
+		
 	}
 
 	public ModelLogged(Utilisateur utilisateur) {

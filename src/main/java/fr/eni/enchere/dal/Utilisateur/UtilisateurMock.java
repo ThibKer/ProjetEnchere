@@ -63,4 +63,10 @@ public class UtilisateurMock implements UtilisateurDAO {
 		return false;
 	}
 
+	@Override
+	public boolean existEmail(String parameter) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
