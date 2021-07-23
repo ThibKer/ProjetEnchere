@@ -283,12 +283,12 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	@Override
 	public List<ArticleVendu> getAllAchatsByUserId(Integer noUtilisateur) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<ArticleVendu>();
 	}
 
 	@Override
 	public List<ArticleVendu> getAllVentessByUserId(Integer noUtilisateur) {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<ArticleVendu>();
 	}
 }

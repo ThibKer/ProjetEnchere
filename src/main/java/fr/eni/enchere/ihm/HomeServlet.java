@@ -88,6 +88,7 @@ System.out.println(achatsOpen + " -> naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 				achatsList = articleVenduManager.getAllAchatsForUserId(loggedUser.getNoUtilisateur());
 				List<Enchere> encheres = enchereManager.getEncheresByUtilisateur(loggedUser.getNoUtilisateur());
 				if(achatsOpen != null) {
+//					achatsList = articleVenduManager.getAchatsByState(achatsList, "EC");
 					for (ArticleVendu item : displayList) {
 						// TODO gerer depuis la liste des achat de 'l'USER
 						if(item.getDateDebutEncheres().isBefore(LocalDateTime.now()) 
@@ -108,6 +109,7 @@ System.out.println(achatsOpen + " -> naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 					}
 				}
 				if(achatsMy != null) {
+//					achatsList = articleVenduManager.getAchatsByState(achatsList, "EC");
 					for (ArticleVendu item : displayList) {
 						// TODO gerer depuis la liste des achat de 'l'USER
 						if(item.getDateDebutEncheres().isBefore(LocalDateTime.now()) 
@@ -139,47 +141,20 @@ System.out.println(achatsOpen + " -> naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 				}else {
 					displayList = articleVenduManager.getAllArticlesVendus();
 				}
-				
 			}
 			if(ventes != null) {
 				List<ArticleVendu> ventesList = new ArrayList<ArticleVendu>();
 				ventesList = articleVenduManager.getAllVentesForUserId(loggedUser.getNoUtilisateur());
 				if(ventesEc != null) {
-					for (ArticleVendu item : displayList) {
-						if(item.getDateDebutEncheres().isBefore(LocalDateTime.now()) 
-							&& item.getDateFinEncheres().isAfter(LocalDateTime.now())
-							&& item.getUtilisateur().getNoUtilisateur() == loggedUser.getNoUtilisateur()) {
-							ventesList.add(item);
-						}
-					}
+					ventesList = articleVenduManager.getAchatsByState(ventesList, "EC");
 				}
 				if(ventesNd != null) {
-					for (ArticleVendu item : displayList) {
-						if(item.getDateDebutEncheres().isAfter(LocalDateTime.now())
-							&& item.getUtilisateur().getNoUtilisateur() == loggedUser.getNoUtilisateur()) {
-							ventesList.add(item);
-						}
-					}
+					ventesList = articleVenduManager.getAchatsByState(ventesList, "ND");
 				}
 				if(ventesEnd != null) {
-					for (ArticleVendu item : displayList) {
-						if(item.getDateFinEncheres().isBefore(LocalDateTime.now())
-							&& item.getUtilisateur().getNoUtilisateur() == loggedUser.getNoUtilisateur()) {
-							ventesList.add(item);
-						}
-					}
-				}
-//				if( !ventesList.isEmpty() ) {
-//					displayList = ventesList;
-//				}else {
-//					displayList = articleVenduManager.getAllArticlesVendus();
-//					for (ArticleVendu article : displayList) {
-//						if( article.getUtilisateur().getNoUtilisateur() == loggedUser.getNoUtilisateur()) {
-//								ventesList.add(article);
-//						}
-//					}
-					displayList = ventesList;
-//				}
+					ventesList = articleVenduManager.getAchatsByState(ventesList, "CLOSE");
+				}				
+				displayList = ventesList;
 			}
 			request.getSession().setAttribute("liste", displayList);
 			System.out.println(displayList);

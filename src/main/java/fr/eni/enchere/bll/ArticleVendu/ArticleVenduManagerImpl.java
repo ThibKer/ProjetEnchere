@@ -1,5 +1,6 @@
 package fr.eni.enchere.bll.ArticleVendu;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,5 +70,16 @@ public class ArticleVenduManagerImpl implements ArticleVenduManager {
 	@Override
 	public List<ArticleVendu> getAllVentesForUserId(Integer noUtilisateur) {
 		return dao.getAllVentessByUserId(noUtilisateur);
+	}
+
+	@Override
+	public List<ArticleVendu> getAchatsByState(List<ArticleVendu> achatsList, String test) {
+		List<ArticleVendu> tmp = new ArrayList<ArticleVendu>();
+		for (ArticleVendu article : achatsList) {
+			if(test.equals(article.getEtatVente())) {
+				tmp.add(article);
+			}
+		}
+		return tmp;
 	}
 }
