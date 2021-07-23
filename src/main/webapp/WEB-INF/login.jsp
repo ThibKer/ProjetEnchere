@@ -15,36 +15,43 @@
 <title>
 	<fmt:message key="t_user_connect" bundle="${r}"></fmt:message>
 </title>
+	<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
 
 	<form action="LoginServlet" method="POST" class="f-connect">
-	  <div>
-	    <label for="identifiant">
-	    	<fmt:message key="l_identifiant" bundle="${r}"></fmt:message>
-	    </label>
-	    <input type="text" name="identifiant" id="identifiant" required>
+		<div class= "id-mdp">
+		  <div class = "test-log">
+		    <label for="identifiant">
+		    	<fmt:message key="l_identifiant" bundle="${r}"></fmt:message>
+		    </label>
+		    <input type="text" name="identifiant" id="identifiant" required>
+		  </div>
+		  <div class = "test-log">
+		    <label for="mdp">
+		    	<fmt:message key="l_mdp" bundle="${r}"></fmt:message>
+		    </label>
+		    <input type="password" name="mdp" id="mdp" required>
+		  </div>
+		  <div style="display:none">
+		    <input type="checkbox" name="souvenir" id="souvenir">
+		    <label for="souvenir">
+		    	<fmt:message key="l_cb_souvenir" bundle="${r}"></fmt:message>
+		    </label>
+		  </div>
 	  </div>
-	  <div>
-	    <label for="mdp">
-	    	<fmt:message key="l_mdp" bundle="${r}"></fmt:message>
-	    </label>
-	    <input type="password" name="mdp" id="mdp" required>
-	  </div>
-	  <div style="display:none">
-	    <input type="checkbox" name="souvenir" id="souvenir">
-	    <label for="souvenir">
-	    	<fmt:message key="l_cb_souvenir" bundle="${r}"></fmt:message>
-	    </label>
-	  </div>
-	  <div>
-	  	<fmt:message key="btn_connexion" bundle="${r}" var="connect"/>	    
-		<input type="submit" name="go" value="${connect}">
-	  </div>
-	  <div style="display:none">
-	    <fmt:message key="h_mdp_lost" bundle="${r}" var="lost"/>   
-		<input type="submit" name="lost" value="${lost}">
-	  </div>
+	  <div class = "bouton-souvenir">
+		  <div class = "bouton-co">
+		  	<fmt:message key="btn_connexion" bundle="${r}" var="connect"/>	    
+			<input type="submit" name="go" value="${connect}">
+		  </div>
+		  <div class = "mdp-oubli">
+			  <div style="display:none">
+			    <fmt:message key="h_mdp_lost" bundle="${r}" var="lost"/>   
+				<input type="submit" name="lost" value="${lost}">
+			  </div>
+		  </div>
+	 </div>
 	</form>
 	
 	<form action="NewUserServlet" method="POST" class="f-connect">

@@ -1,3 +1,4 @@
+/*HOME PAGE STYLE */
 nav {
 	
  list-style-type: none;
@@ -29,35 +30,9 @@ nav > a:hover {
 	padding: 35px ;
 	font-size: 1.5em;
 }
-
-/* .h-filtre{
-	margin: 10px 50px 20px;
-	display: flex;
-	flex-flow: column wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	font-size: 1.2em;
-	padding-bottom: 10px;
-	
-	
-} */
-#filtre {
-	padding: 10px;
-	border-radius: 30px;
-	width: 20em;
-	
-}
-/* .h-categorie{
-	margin: 10px 50px 20px;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	align-content: space-between;
-	font-size: 1.2em;
-	
-} */
 .f-create-article{
+	margin: 5% 0;
+	block-size: 200px;
 	background-color: grey;
 	width: 100%;
 	display:flex;
@@ -72,10 +47,26 @@ nav > a:hover {
 .h-filtre{
 	width: auto;
 display: block;
+padding-bottom: 50px;
 }
+
+#filtre {
+	padding: 10px;
+	border-radius: 30px;
+	width: 20em;
+	
+}
+
 .h-categorie{
 	width: auto;
-display: block;
+	display: block;
+}
+#categorie{
+	
+	margin-right: 80px;
+	width: 15em;
+	
+	
 }
 .f-container34{
 	flex-grow:1;
@@ -92,5 +83,316 @@ display: block;
 .bouton{
 	flex-grow:0.5;
 	align-self: center;
-	width:auto;
+	width:50%;
+	
+}
+
+.bouton > input  {
+	
+  background-color: #B80A0A;
+  border: none;
+  color: white;
+  padding: 30px 64px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 8px 4px;
+  cursor: pointer;
+  width : 40%;
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/*USER CREATION STYLE */
+.uc-st {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 35px ;
+	font-size: 1.5em;
+}
+
+.f-create-user  {
+	width: 100%;
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+    justify-content: space-around;	
+}
+.uc-container{
+	background-color: grey;
+	width: 90%;
+	display:flex;
+	flex-direction: row;
+	align-items:center;
+    justify-content: space-around;    
+}
+.uc-gauche {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 20%;
+	padding-left: 30px;	
+}
+.test {
+	padding: 20px;
+	display:flex;
+	flex-direction:row;	
+}
+.uc-droite {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 20%;	
+}
+.uc-bouton{
+	padding-top: 50px;
+	display: flex;
+	flex-direction: row;
+    width: 20%;
+    justify-content: space-between;
+    align-items:center;            
+}
+
+/*LOGIN STYLE */
+.f-connect {
+	background-color: grey;
+	padding-top: 200px;
+	width: 100%;
+	display:flex;
+	flex-direction:column;
+	justify-content: center;
+}
+.id-mdp{
+	width: 100%;
+	display:flex;
+	flex-direction: column;
+	align-items:center;	
+}
+.bouton-souvenir{
+	width:80%;
+	display:flex;
+	flex-direction:row;
+	align-items:center;	
+}
+.bouton-co{
+	padding-top: 20px;
+	display: flex;
+	flex-direction: row;
+    width: 20%;
+    margin-left:650px;	
+}
+.mdp-oubli{
+	width:80%;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+	margin-right:300px;	
+}
+.test-log {
+	padding: 20px;
+	display:flex;
+	flex-direction:row;	
+}
+.f-creat {
+	background-color: grey;
+	width: 100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items:center;
+	padding-top: 50px;	
+}
+/*USER MODIFICATION STYLE */
+.um-st {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 35px ;
+	font-size: 1.5em;
+}
+
+.f-create-user  {
+	width: 100%;
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+    justify-content: space-around;	
+}
+.um-container{
+	background-color: grey;
+	width: 90%;
+	display:flex;
+	flex-direction: row;
+	align-items:center;
+    justify-content: space-around;    
+}
+.um-gauche {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 20%;
+	padding-left: 30px;	
+}
+.um-test {
+	padding: 20px;
+	display:flex;
+	flex-direction:row;	
+}
+.um-droite {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 20%;	
+}
+.um-bouton{
+	padding-top: 50px;
+	display: flex;
+	flex-direction: row;
+    width: 20%;
+    justify-content: space-between;
+    align-items:center;            
+}
+/*MY PROFIL STYLE*/
+.mp-st {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 35px ;
+	font-size: 1.5em;
+}
+.mp-container{
+	background-color: grey;
+	width: 100%;
+	display:flex;
+	flex-direction: column;
+	align-items:center;
+}
+.f-myprofil{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content: center;
+	justify-content: space-between;
+	margin-left: 500px;
+	margin-right: 500px;
+	
+	
+}
+/*NEW ARTICLE +MODIF ARTICLE STYLE*/
+.na-st {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 35px ;
+	font-size: 1.5em;
+}
+
+.f-new-article {
+	width: 100%;
+	display:flex;
+	flex-direction: row;
+	align-items:center;
+    	
+}
+
+.na-droite{
+	width: 50%;
+	display:flex;
+	flex-direction: column;
+	align-items:justify-left;
+    justify-content: space-around;	
+    padding-left:15%;
+   
+	
+}
+/*.na-droite > div:nth-child(even){
+	padding-left:60%;
+}*/
+/*.na-droite > div > label::after{
+	padding-left: 60%;
+	.flex-outer > li:not(:last-child) {
+  margin-bottom: 20px;
+}
+}*/
+/*.na-droite > div > label,
+.na-droite div input {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+.na-droite > div > label + * {
+  flex: 1 0 220px;
+}*/
+
+.na-droite > div:not(:last-child){
+	margin: 20px;
+	
+}
+.na-gauche{
+	width: 50%;
+	
+}
+.cadre-retrait{
+	width:40%;
+	border-width:2px;
+	border-style:solid;
+	border-color:black;
+	
+}
+.na-bouton{
+	padding-top: 50px;
+	display: flex;
+	flex-direction: row;
+    width: 20%;
+    justify-content:space-between ;
+    align-items:center;   
+	
+}
+/*DETAILENCHERE STYLE */
+.mp-st {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 35px ;
+	font-size: 1.5em;
+}
+.f-propo-vente {
+	width: 100%;
+	display:flex;
+	flex-direction: row;
+	align-items:center;
+    	
+}
+
+.mp-droite{
+	width: 50%;
+	display:flex;
+	flex-direction: column;
+	align-items:justify-left;
+    justify-content: space-around;	
+    padding-left:15%;
+   
+	
+}
+.mp-droite > div:not(:last-child){
+	margin: 20px;
+	
+}
+.mp-gauche{
+	width: 50%;
+	
+}
+.mp-bouton{
+	padding-top: 50px;
+	display: flex;
+	flex-direction: row;
+    width: 20%;
+    justify-content:space-between ;
+    align-items:center;   
 }
