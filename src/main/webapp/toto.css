@@ -355,7 +355,7 @@ padding-bottom: 50px;
 	
 }
 /*DETAILENCHERE STYLE */
-.mp-st {
+.de-st {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
@@ -371,7 +371,7 @@ padding-bottom: 50px;
     	
 }
 
-.mp-droite{
+.de-droite{
 	width: 50%;
 	display:flex;
 	flex-direction: column;
@@ -381,15 +381,15 @@ padding-bottom: 50px;
    
 	
 }
-.mp-droite > div:not(:last-child){
+.de-droite > div:not(:last-child){
 	margin: 20px;
 	
 }
-.mp-gauche{
+.de-gauche{
 	width: 50%;
 	
 }
-.mp-bouton{
+.de-bouton{
 	padding-top: 50px;
 	display: flex;
 	flex-direction: row;

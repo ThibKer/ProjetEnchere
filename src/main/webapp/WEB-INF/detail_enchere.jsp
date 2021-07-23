@@ -83,7 +83,7 @@
 	   	<input type="number" name="proposition" id="proposition" min="${vente.offre}">
 	  </div>
 	  
-	  <div class="mp-bouton">
+	  <div class="de-bouton">
 	    <fmt:message key="btn_encherir" bundle="${r}" var="encherir"/>   
 		<input type="submit" name="bet" value="${encherir}">
 	  </div>
