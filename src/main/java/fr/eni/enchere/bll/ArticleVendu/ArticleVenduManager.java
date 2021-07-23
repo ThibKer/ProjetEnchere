@@ -15,6 +15,6 @@ public interface ArticleVenduManager {
 	public ArticleVendu getArticleById(Integer articleId);
 	public List<ArticleVendu> getAllAchatsForUserId(Integer noUtilisateur);
 	public List<ArticleVendu> getAllVentesForUserId(Integer noUtilisateur);
-	public List<ArticleVendu> getAchatsByState(List<ArticleVendu> achatsList, String string);
+	public List<ArticleVendu> getVentesByState(List<ArticleVendu> achatsList, String string);
 	
 }

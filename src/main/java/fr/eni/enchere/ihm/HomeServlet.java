@@ -146,13 +146,13 @@ System.out.println(achatsOpen + " -> naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 				List<ArticleVendu> ventesList = new ArrayList<ArticleVendu>();
 				ventesList = articleVenduManager.getAllVentesForUserId(loggedUser.getNoUtilisateur());
 				if(ventesEc != null) {
-					ventesList = articleVenduManager.getAchatsByState(ventesList, "EC");
+					ventesList = articleVenduManager.getVentesByState(ventesList, "EC");
 				}
 				if(ventesNd != null) {
-					ventesList = articleVenduManager.getAchatsByState(ventesList, "ND");
+					ventesList = articleVenduManager.getVentesByState(ventesList, "ND");
 				}
 				if(ventesEnd != null) {
-					ventesList = articleVenduManager.getAchatsByState(ventesList, "CLOSE");
+					ventesList = articleVenduManager.getVentesByState(ventesList, "CLOSE");
 				}				
 				displayList = ventesList;
 			}
@@ -164,13 +164,6 @@ System.out.println(achatsOpen + " -> naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 			System.out.println(displayList);
 		}
 		request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-		
-		
-//		if(test != null) {
-//			request.getRequestDispatcher("WEB-INF/user_creation.jsp").forward(request, response);
-//		}else {
-//			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
-//		}
 	}
 
 	/**

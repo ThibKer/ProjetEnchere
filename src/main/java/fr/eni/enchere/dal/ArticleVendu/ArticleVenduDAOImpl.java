@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +15,6 @@ import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.ConnectionProvider;
-import fr.eni.enchere.dal.FactoryDAO;
-import fr.eni.enchere.dal.Categorie.CategorieDAO;
-import fr.eni.enchere.dal.Utilisateur.UtilisateurDAO;
 
 
 
@@ -283,12 +278,62 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO {
 	@Override
 	public List<ArticleVendu> getAllAchatsByUserId(Integer noUtilisateur) {
 		// TODO Auto-generated method stub
-		return new ArrayList<ArticleVendu>();
+		List<ArticleVendu> res = new ArrayList<ArticleVendu>();
+		return res;
 	}
 
 	@Override
 	public List<ArticleVendu> getAllVentessByUserId(Integer noUtilisateur) {
 		// TODO Auto-generated method stub
-		return new ArrayList<ArticleVendu>();
+		List<ArticleVendu> res = new ArrayList<ArticleVendu>();
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement stmt = connection.prepareStatement("SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente" 
+					+ ",A.no_utilisateur,U.administrateur,U.pseudo,U.prenom,U.nom,U.email,U.credit,U.code_postal,U.rue,U.ville,U.telephone,A.no_categorie,C.libelle"
+				    + " FROM " + table + " as A JOIN " + t_cate + " as C ON C.no_categorie = A.no_categorie JOIN "+ t_user + " as U ON U.no_utilisateur = A.no_utilisateur"
+				    + " WHERE A.no_utilisateur=?"
+			);
+			stmt.setInt(1, noUtilisateur);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Utilisateur user = new Utilisateur();
+				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				user.setPseudo(rs.getString("pseudo"));
+				user.setNom(rs.getString("nom"));
+				user.setPrenom(rs.getString("prenom"));
+				user.setEmail(rs.getString("email"));
+				user.setCredit(rs.getInt("credit"));
+				user.setTelephone(rs.getString("telephone"));
+				user.setRue(rs.getString("rue"));
+				user.setCodePostal(rs.getString("code_postal"));
+				user.setVille(rs.getString("ville"));
+				user.setAdministrateur(rs.getString("administrateur"));
+				Categorie cate = new Categorie();	
+				cate.setNoCategorie(rs.getInt("no_categorie"));
+				cate.setLibelle(rs.getString("libelle"));
+				ArticleVendu article = new ArticleVendu();
+				article.setNoArticle(rs.getInt("no_article"));
+				article.setNomArticle(rs.getString("nom_article"));
+				article.setDescription(rs.getString("description"));
+				article.setDateDebutEncheres(Timestamp.valueOf(rs.getString("date_debut_encheres")).toLocalDateTime());
+				article.setDateFinEncheres(Timestamp.valueOf(rs.getString("date_fin_encheres")).toLocalDateTime());
+				if(article.getDateDebutEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("ND");
+				}
+				if(article.getDateFinEncheres().isBefore(LocalDateTime.now())) {
+					article.setEtatVente("CLOSE");
+				}
+				if(article.getDateDebutEncheres().isBefore(LocalDateTime.now()) && article.getDateFinEncheres().isAfter(LocalDateTime.now())) {
+					article.setEtatVente("EC");
+				}
+				article.setMiseAPrix(rs.getInt("prix_initial"));
+				article.setPrixVente(rs.getInt("prix_vente"));			
+				article.setUtilisateur(user);
+				article.setCategorie(cate);
+				res.add(article);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 }

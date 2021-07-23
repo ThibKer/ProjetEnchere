@@ -18,11 +18,11 @@
 	<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
-	<label for="st">
+	<label for="st" class="mp-st">
 	   <fmt:message key="st_vente_new" bundle="${r}"></fmt:message>
 	</label>
 
-	<form action="NewArticleServlet" method="POST" class="f-create-article">
+	<form action="NewArticleServlet" method="POST" class="f-new-article">
 		<div class="na-gauche">
 		
 		</div>

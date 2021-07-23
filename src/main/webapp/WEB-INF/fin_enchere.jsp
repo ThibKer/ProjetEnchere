@@ -17,7 +17,7 @@
 </title>
 </head>
 <body>
-	<label for="st">
+	<label for="st" class="mp-st">
 	   <fmt:message key="st_win_vente" bundle="${r}"></fmt:message>
 	</label>
 

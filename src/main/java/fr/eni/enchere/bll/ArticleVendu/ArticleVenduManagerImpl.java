@@ -73,7 +73,7 @@ public class ArticleVenduManagerImpl implements ArticleVenduManager {
 	}
 
 	@Override
-	public List<ArticleVendu> getAchatsByState(List<ArticleVendu> achatsList, String test) {
+	public List<ArticleVendu> getVentesByState(List<ArticleVendu> achatsList, String test) {
 		List<ArticleVendu> tmp = new ArrayList<ArticleVendu>();
 		for (ArticleVendu article : achatsList) {
 			if(test.equals(article.getEtatVente())) {

@@ -43,7 +43,7 @@
 	</nav>
 	
 	
-	<label for="st" class = "sous-titre">
+	<label for="st" class="mp-st">
 	   <fmt:message key="st_home" bundle="${r}"></fmt:message>
 	</label>
 

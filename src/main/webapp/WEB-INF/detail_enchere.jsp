@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
-	<label for="st">
+	<label for="st" class="mp-st">
 	   <fmt:message key="st_detail_vente" bundle="${r}"></fmt:message>
 	</label>
 

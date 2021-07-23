@@ -257,6 +257,14 @@ padding-bottom: 50px;
     align-items:center;            
 }
 /*MY PROFIL STYLE*/
+.de-st {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 35px ;
+	font-size: 1.5em;
+}
 .mp-st {
 	display: flex;
 	flex-flow: row wrap;

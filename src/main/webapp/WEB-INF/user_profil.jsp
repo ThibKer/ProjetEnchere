@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="toto.css" type="text/css"/>
 </head>
 <body>
-	<label for="st">
+	<label for="st" class="mp-st">
 	   <fmt:message key="st_user_profil" bundle="${r}"></fmt:message>
 	</label>
 		<div class="mp-container">
